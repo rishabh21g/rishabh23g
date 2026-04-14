@@ -31,8 +31,7 @@ export default function CalendarComp() {
           className="
             flex items-center justify-center
              py-2
-            border-b border-border/30
-            bg-background/10 backdrop-blur-3xl
+            bg-background/20 backdrop-blur-3xl
             cursor-grab active:cursor-grabbing
             select-none
           "
@@ -40,7 +39,7 @@ export default function CalendarComp() {
           <span className="bg-primary/90 w-12 h-0.5 rounded-full" aria-hidden="true"></span>
         </div>
 
-        <CardContent className="p-0">
+        <CardContent>
           <Calendar
             mode="single"
             selected={date}
@@ -48,14 +47,13 @@ export default function CalendarComp() {
             timeZone={timeZone}
             showOutsideDays={false}
             className="
-              bg-transparent
-              p-2
+              p-1
               text-xs
               [--cell-size:--spacing(7)]
               [--cell-radius:var(--radius-sm)]
             "
             classNames={{
-              months: "relative flex flex-col gap-2",
+              months: "relative flex flex-col gap-1",
               month: "flex w-full flex-col gap-2",
               week: "mt-1 flex w-full",
 
