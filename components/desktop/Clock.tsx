@@ -4,16 +4,20 @@ import React, { useEffect, useState } from "react";
 
 export function Clock() {
   const [time, setTime] = useState<Date | undefined>(new Date());
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => setMounted(true), []);
 
   useEffect(() => {
+
+    if (!mounted) return;
 
     const timer = setInterval(() => {
       setTime(new Date());
     }, 1000 *60);
 
     return () => clearInterval(timer);
-  }, []);
-
+  }, [mounted]);
 
 
   const formattedTime = time?.toLocaleTimeString("en-US", {

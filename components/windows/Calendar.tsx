@@ -11,10 +11,15 @@ export default function CalendarComp() {
 
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [timeZone, setTimeZone] = useState<string | undefined>(undefined);
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <motion.div

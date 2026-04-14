@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, useDragControls } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Eye } from "lucide-react";
 
 type VisitorCounts = { totalVisits: number; uniqueVisitors: number };
 
@@ -14,8 +13,9 @@ export default function Visitors() {
    const fetchVisits = async () => {
       await fetch("/api/visitors", { method: "POST" }); 
       const res = await fetch("/api/visitors", { cache: "no-store" });
+      const data = await res.json()
+      setCounts(data)
       if (!res.ok) throw new Error("Failed to load visitors");
-      setCounts(await res.json());
     };
     
 
@@ -52,7 +52,7 @@ export default function Visitors() {
             </div>
 
             <div className="mt-1 text-4xl font-semibold text-foreground tabular-nums">
-              {counts ? counts.totalVisits.toLocaleString() : "—"}
+              {counts ? counts.totalVisits.toLocaleString() : "_"}
             </div>
 
             <div className="mt-1 text-sm text-muted-foreground/60">
