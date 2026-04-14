@@ -1,9 +1,14 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { Calendar } from "../ui/calendar";
 import { Card, CardContent } from "../ui/card";
+import { motion, useDragControls } from "framer-motion";
+import { CalendarDays } from "lucide-react";
 
 export default function CalendarComp() {
+  const dragControls = useDragControls();
+
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [timeZone, setTimeZone] = useState<string | undefined>(undefined);
 
@@ -12,31 +17,62 @@ export default function CalendarComp() {
   }, []);
 
   return (
-    <Card
-      className="
-        mx-auto w-fit p-0
-        bg-background/20 backdrop-blur-3xl
-        border border-border/30
-        ring-1 ring-foreground/10
-      "
+    <motion.div
+      className="absolute left-8 top-56 z-40"
+      drag
+      dragControls={dragControls}
+      dragListener={false}
+      dragMomentum={false}
+      style={{ touchAction: "none" }}
     >
-      <CardContent className="p-0">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          timeZone={timeZone}
-          showWeekNumber
-          className="bg-transparent"
-          classNames={{
-            month_caption: "text-foreground/80",
-            weekday: "text-muted-foreground/70",
-            week_number: "text-muted-foreground/60",
-            button_previous: "text-foreground/70 hover:text-foreground",
-            button_next: "text-foreground/70 hover:text-foreground",
-          }}
-        />
-      </CardContent>
-    </Card>
+      <Card className="w-fit bg-background/20 backdrop-blur-3xl border border-border/30">
+        <div
+          onPointerDown={(e) => dragControls.start(e.nativeEvent)}
+          className="
+            flex items-center justify-center
+             py-2
+            border-b border-border/30
+            bg-background/10 backdrop-blur-3xl
+            cursor-grab active:cursor-grabbing
+            select-none
+          "
+        >
+          <span className="bg-primary/90 w-12 h-0.5 rounded-full" aria-hidden="true"></span>
+        </div>
+
+        <CardContent className="p-0">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            timeZone={timeZone}
+            showOutsideDays={false}
+            className="
+              bg-transparent
+              p-2
+              text-xs
+              [--cell-size:--spacing(7)]
+              [--cell-radius:var(--radius-sm)]
+            "
+            classNames={{
+              months: "relative flex flex-col gap-2",
+              month: "flex w-full flex-col gap-2",
+              week: "mt-1 flex w-full",
+
+              weekdays: "flex w-full",
+              weekday: "flex-1 text-center text-[10px] font-normal text-muted-foreground/70 select-none",
+
+              month_caption: "flex h-8 w-full items-center justify-center px-8",
+              caption_label: "text-xs text-muted-foreground select-none",
+              nav: "absolute inset-x-0 top-0 flex w-full items-center justify-between px-2",
+
+              today: "rounded-[var(--radius-sm)] bg-primary/20 ring-1 ring-border/25 text-foreground",
+              day_button:
+                "hover:bg-primary/20 hover:text-foreground dark:hover:text-foreground [&>span]:text-[10px] [&>span]:opacity-70",
+            }}
+          />
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 }

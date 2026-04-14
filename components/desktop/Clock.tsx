@@ -3,32 +3,26 @@
 import React, { useEffect, useState } from "react";
 
 export function Clock() {
-  const [mounted, setMounted] = useState(false);
-  const [time, setTime] = useState<Date | null>(null);
+  const [time, setTime] = useState<Date | undefined>(new Date());
 
   useEffect(() => {
-    setMounted(true);
-    setTime(new Date());
 
     const timer = setInterval(() => {
       setTime(new Date());
-    }, 60_000);
+    }, 1000 *60);
 
     return () => clearInterval(timer);
   }, []);
 
-  // Prevent SSR/CSR mismatch (don’t render date/time until client mounts)
-  if (!mounted || !time) {
-    return <div className="text-sm text-foreground/80 tabular-nums">—</div>;
-  }
 
-  const formattedTime = time.toLocaleTimeString("en-US", {
+
+  const formattedTime = time?.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false
   });
 
-  const formattedDate = time.toLocaleDateString("en-US", {
+  const formattedDate = time?.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
     day: "2-digit",

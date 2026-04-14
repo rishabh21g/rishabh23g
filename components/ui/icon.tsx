@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
 export interface DockIconProps {
-  label: string;          // tooltip text (use uppercase labels like screenshot)
+  label: string;         
   icon: LucideIcon;
   active?: boolean;       // show dot under icon
   onClick?: () => void;
