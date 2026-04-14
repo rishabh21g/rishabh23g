@@ -1,9 +1,11 @@
-import React from 'react'
-
-const Calendar = () => {
+import React, { useState } from 'react'
+import { Calendar } from '../ui/calendar'
+const CalendarComp = () => {
+  const [date, setDate] = useState <Date | undefined>(new Date())
   return (
-    <div>Calendar</div>
+      <Calendar mode='single' selected={date} onSelect={setDate} className='rounded-md border' />
+   
   )
 }
 
-export default Calendar
+export default CalendarComp
