@@ -129,3 +129,37 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .desktop-bg {
+    position: relative;
+    isolation: isolate;
+    background: var(--background);
+  }
+
+  .desktop-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+
+    /* base */
+    background-color: var(--background);
+
+    /* dotted pattern (uses theme foreground with low alpha) */
+    background-image:
+      radial-gradient(
+        circle,
+        oklch(from var(--foreground) l c h / 0.10) 1px,
+        transparent 1px
+      );
+
+    /* spacing between dots */
+    background-size: 22px 22px;
+
+    /* soft vignette like the screenshot */
+    mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+    opacity: 0.9;
+  }
+}
