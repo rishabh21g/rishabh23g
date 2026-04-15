@@ -30,12 +30,27 @@ export default function Window({
       dragMomentum={false}
       onPointerDown={onFocus}
       onMouseDown={onFocus}
+      initial={{ opacity: 0, scale: 0.95, y: 8, filter: "blur(8px)" }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        filter: "blur(0px)",
+        transition: { duration: 0.18, ease: "easeOut" },
+      }}
+      exit={{
+        opacity: 0,
+        scale: 0.98,
+        y: 8,
+        filter: "blur(8px)",
+        transition: { duration: 0.14, ease: "easeIn" },
+      }}
     >
       <Card
         className={cn(
           "max-h-2/4 overflow-hidden",
-          "bg-background/20 backdrop-blur-3xl border border-border/30 shadow-none",
-          "py-1 gap-0", 
+          "bg-background backdrop-blur-3xl border border-border/30 shadow-none",
+          "py-1 gap-0",
           isActive ? "ring-1 ring-border/60  shadow-accent" : "ring-1 ring-border/20"
         )}
       >

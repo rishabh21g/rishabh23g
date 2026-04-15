@@ -14,6 +14,7 @@ import Resume from "@/components/Screens/Resume";
 import System from "@/components/Screens/System";
 import Notes from "@/components/Screens/Notes";
 import { DEFAULT_POS,  REGISTRY,  } from "@/types/desktop";
+import { AnimatePresence } from "framer-motion";
 
 
 
@@ -36,7 +37,7 @@ export default function Desktop() {
   return (
     <div className="w-full h-full">
       <MenuBar />
-
+     <AnimatePresence initial={false}>
       {stack.map((id, idx) => {
         const { title, Component } = REGISTRY[id];
         return (
@@ -53,6 +54,7 @@ export default function Desktop() {
           </Window>
         );
       })}
+      </AnimatePresence>
 
       <Dock activeIds={activeIds} onToggle={toggleApp} />
     </div>

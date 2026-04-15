@@ -109,7 +109,7 @@ export default function GithubStreak() {
 
         <CardContent className="p-2">
           {!calendar ? (
-            <div className="h-24 w-200 rounded-md bg-muted/30" />
+            <div className="mb-2 grid grid-flow-col auto-cols-3 gap-0.75 pl-7 w-150 h-28 rounded-md bg-muted/30" />
           ) : (
             <>
               {/* Month labels */}
