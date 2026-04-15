@@ -40,7 +40,7 @@ export default function ThemeCard() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-      <Card className="w-[min(320px,calc(100vw-4rem))] bg-background/20 backdrop-blur-3xl border border-border/30">
+      <Card className="w-[min(220px,calc(100vw-4rem))] bg-background/20 backdrop-blur-3xl border border-border/30">
         <CardContent className="p-0.5">
           {/* handle */}
           <div
@@ -55,13 +55,13 @@ export default function ThemeCard() {
             <div className="text-[0.65rem] uppercase tracking-[0.35em] text-muted-foreground/70">
               THEME
             </div>
-            <div className="text-[0.65rem] uppercase tracking-[0.35em] text-muted-foreground/70">
+            <div className="text-[0.65rem] uppercase tracking-tighter text-muted-foreground/70">
               {activeLabel}
             </div>
           </div>
 
-          {/* tiles */}
-          <div className="flex items-center gap-2 px-2 pb-4">
+          {/* themes */}
+          <div className="flex flex-wrap items-center gap-1.5 px-3 pb-4">
             {THEMES.map((t) => {
               const selected = t.id === active;
 
@@ -69,46 +69,19 @@ export default function ThemeCard() {
                 <button
                   key={t.id}
                   type="button"
+                  aria-pressed={selected}
                   onClick={() => {
                     setActive(t.id);
                     applyThemeToBody(t.id);
                   }}
-                  className="group text-left"
+                  className={cn(
+                    "rounded-md px-2 py-1 text-[0.65rem] uppercase tracking-tight transition-colors",
+                    selected
+                      ? "bg-foreground/10 text-foreground"
+                      : "text-muted-foreground/70 hover:text-foreground/80 hover:bg-muted/20"
+                  )}
                 >
-                  <div
-                    className={cn(
-                      "relative h-10 w-10 rounded-xl ring-1 ring-border/30 bg-muted/25 overflow-hidden",
-                      selected ? "ring-2 ring-foreground/60" : "hover:bg-muted/35"
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        "absolute inset-0 opacity-90",
-                        t.id === "theme-default" && "bg-linear-to-br from-blue-500/40 to-muted/10",
-                        t.id === "theme-logic" &&
-                          "bg-linear-to-br from-[oklch(0.72_0.16_55_/_0.45)] to-[oklch(0.205_0_0_/_0.08)]",
-                        t.id === "theme-midnight" &&
-                          "bg-linear-to-br from-[oklch(0.62_0.11_223_/_0.45)] to-[oklch(0.145_0_0_/_0.08)]",
-                        t.id === "theme-weeknd" &&
-                          "bg-linear-to-br from-[oklch(0.66_0.19_25_/_0.45)] to-[oklch(0.205_0_0_/_0.08)]",
-                        t.id === "theme-radiohead" &&
-                          "bg-linear-to-br from-[oklch(0.68_0.14_155_/_0.45)] to-[oklch(0.205_0_0_/_0.08)]"
-                      )}
-                    />
-                    <div className="absolute inset-0 ring-1 ring-border/20 rounded-xl" />
-
-                    {/* bottom-right dot */}
-                    <div
-                      className={cn(
-                        "absolute bottom-2 right-2 h-2 w-2 rounded-full bg-foreground transition-opacity",
-                        selected ? "opacity-80" : "opacity-0 group-hover:opacity-40"
-                      )}
-                    />
-                  </div>
-
-                  <div className="mt-2 text-[0.65rem] uppercase tracking-tighter text-muted-foreground/60 text-center">
-                    {t.label}
-                  </div>
+                  {t.label}
                 </button>
               );
             })}

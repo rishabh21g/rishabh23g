@@ -64,7 +64,7 @@ export default function Mobile() {
       <div className="pt-12 px-3 pb-6 mx-auto w-full max-w-130 space-y-4">
         {/* Basics */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
-          <Card className="bg-background/10 backdrop-blur-xl ring-1 ring-border/30">
+          <Card className="bg-background/10 backdrop-blur-xl ring-0">
             <CardHeader>
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
@@ -112,40 +112,11 @@ export default function Mobile() {
           </Card>
         </motion.div>
 
-        {/* Skills */}
-        <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
-          <Card className="bg-background/10 backdrop-blur-xl ring-1 ring-border/30">
-            <CardHeader>
-              <CardTitle className="text-sm">Skills</CardTitle>
-              <CardDescription>Stack overview</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div>
-                <div className="text-[0.7rem] uppercase tracking-tight text-muted-foreground/60">Languages</div>
-                <div className="mt-2 flex flex-wrap gap-2">{skills.languages.map((s) => <Chip key={s}>{s}</Chip>)}</div>
-              </div>
-
-              <div>
-                <div className="text-[0.7rem] uppercase tracking-tight text-muted-foreground/60">Frameworks</div>
-                <div className="mt-2 flex flex-wrap gap-2">{skills.librariesFrameworks.map((s) => <Chip key={s}>{s}</Chip>)}</div>
-              </div>
-
-              <div>
-                <div className="text-[0.7rem] uppercase tracking-tight text-muted-foreground/60">Data / Infra</div>
-                <div className="mt-2 flex flex-wrap gap-2">{skills.database.map((s) => <Chip key={s}>{s}</Chip>)}</div>
-              </div>
-
-              <div>
-                <div className="text-[0.7rem] uppercase tracking-tight text-muted-foreground/60">Tools / OS</div>
-                <div className="mt-2 flex flex-wrap gap-2">{skills.toolsOS.map((s) => <Chip key={s}>{s}</Chip>)}</div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        <hr className="border-border/90" />
 
         {/* Experience */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
-          <Card className="bg-background/10 backdrop-blur-xl ring-1 ring-border/30">
+          <Card className="bg-background/10 backdrop-blur-xl ring-0">
             <CardHeader>
               <CardTitle className="text-sm">Experience</CardTitle>
               <CardDescription>Recent roles</CardDescription>
@@ -178,9 +149,44 @@ export default function Mobile() {
           </Card>
         </motion.div>
 
+        <hr className="border-border/90" />
+
+        {/* Skills */}
+        <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
+          <Card className="bg-background/10 backdrop-blur-xl ring-0">
+            <CardHeader>
+              <CardTitle className="text-sm">Skills</CardTitle>
+              <CardDescription>Stack overview</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-1">
+              <div>
+                <div className="text-[0.7rem] uppercase tracking-tight text-muted-foreground/60">Languages</div>
+                <div className="mt-1 flex flex-wrap gap-1">{skills.languages.map((s) => <Chip key={s}>{s}</Chip>)}</div>
+              </div>
+
+              <div>
+                <div className="text-[0.7rem] uppercase tracking-tight text-muted-foreground/60">Frameworks</div>
+                <div className="mt-1 flex flex-wrap gap-1">{skills.librariesFrameworks.map((s) => <Chip key={s}>{s}</Chip>)}</div>
+              </div>
+
+              <div>
+                <div className="text-[0.7rem] uppercase tracking-tight text-muted-foreground/60">Data / Infra</div>
+                <div className="mt-1 flex flex-wrap gap-1">{skills.database.map((s) => <Chip key={s}>{s}</Chip>)}</div>
+              </div>
+
+              <div>
+                <div className="text-[0.7rem] uppercase tracking-tight text-muted-foreground/60">Tools / OS</div>
+                <div className="mt-1 flex flex-wrap gap-1">{skills.toolsOS.map((s) => <Chip key={s}>{s}</Chip>)}</div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <hr className="border-border/90" />
+
         {/* Projects */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
-          <Card className="bg-background/10 backdrop-blur-xl ring-1 ring-border/30">
+          <Card className="bg-background/10 backdrop-blur-xl ring-0">
             <CardHeader>
               <CardTitle className="text-sm">Projects</CardTitle>
               <CardDescription>Selected work</CardDescription>
@@ -220,9 +226,11 @@ export default function Mobile() {
           </Card>
         </motion.div>
 
+        <hr className="border-border/90" />
+
         {/* Education + Achievements */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
-          <Card className="bg-background/10 backdrop-blur-xl ring-1 ring-border/30">
+          <Card className="bg-background/10 backdrop-blur-xl ring-0">
             <CardHeader>
               <CardTitle className="text-sm">Education & Achievements</CardTitle>
               <CardDescription>Highlights</CardDescription>

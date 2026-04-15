@@ -34,7 +34,7 @@ export default function Home() {
       </div>
 
       {/* Mobile layout */}
-      <div className="block sm:hidden">
+      <div className="block md:hidden">
         <Mobile />
       </div>
     </main>

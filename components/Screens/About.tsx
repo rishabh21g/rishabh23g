@@ -18,7 +18,7 @@ export default function About() {
     <section className="flex h-full flex-col">
       {/* Top */}
       <div className="flex flex-col">
-        <h1 className="text-5xl font-semibold tracking-tight leading-[0.9] sm:text-6xl">
+        <h1 className="text-3xl font-semibold tracking-tight leading-[0.9] sm:text-6xl">
           {basics.name.split(" ").slice(0, -1).join(" ") || basics.name}
           <br />
           {basics.name.split(" ").slice(-1)[0]}
