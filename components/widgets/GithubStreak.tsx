@@ -66,7 +66,7 @@ export default function GithubStreak() {
 
   return (
     <motion.div
-      className="absolute left-1/2 top-16 z-40 -translate-x-1/2"
+      className="absolute right-7 bottom-24 z-40 "
       drag
       dragControls={dragControls}
       dragListener={false}
