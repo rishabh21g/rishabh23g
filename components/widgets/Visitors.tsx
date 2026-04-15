@@ -10,21 +10,25 @@ export default function Visitors() {
   const dragControls = useDragControls();
   const [counts, setCounts] = useState<VisitorCounts | null>(null);
 
-   const fetchVisits = async () => {
-      await fetch("/api/visitors", { method: "POST" }); 
-      const res = await fetch("/api/visitors", { cache: "no-store" });
-      const data = await res.json()
+  const fetchVisits = async () => {
+    await fetch("/api/visitors", { method: "POST" });
+    const res = await fetch("/api/visitors", { cache: "no-store" });
+    const data = await res.json()
+    if (!res.ok)  { 
+      console.log("Failed to load visitors")
+    }else{
       setCounts(data)
-      if (!res.ok) throw new Error("Failed to load visitors");
-    };
-    
+      
+     }
+  };
+
 
   useEffect(() => {
     fetchVisits().catch(console.error);
   }, []);
 
   return (
-   <motion.div
+    <motion.div
       className="absolute left-8 top-56 z-40"
       drag
       dragControls={dragControls}

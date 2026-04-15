@@ -84,16 +84,20 @@ export default function ThemeCard() {
                     <div
                       className={cn(
                         "absolute inset-0 opacity-90",
-                        t.id === "theme-default" && "bg-linear-to-br from-muted/40 to-muted/10",
-                        t.id === "theme-logic" && "bg-linear-to-br from-primary/35 to-muted/10",
-                        t.id === "theme-midnight" && "bg-linear-to-br from-muted/50 to-background/10",
-                        t.id === "theme-weeknd" && "bg-linear-to-br from-primary/40 to-muted/10",
-                        t.id === "theme-radiohead" && "bg-linear-to-br from-lime-800 to-lime-950"
+                        t.id === "theme-default" && "bg-linear-to-br from-blue-500/40 to-muted/10",
+                        t.id === "theme-logic" &&
+                          "bg-linear-to-br from-[oklch(0.72_0.16_55_/_0.45)] to-[oklch(0.205_0_0_/_0.08)]",
+                        t.id === "theme-midnight" &&
+                          "bg-linear-to-br from-[oklch(0.62_0.11_223_/_0.45)] to-[oklch(0.145_0_0_/_0.08)]",
+                        t.id === "theme-weeknd" &&
+                          "bg-linear-to-br from-[oklch(0.66_0.19_25_/_0.45)] to-[oklch(0.205_0_0_/_0.08)]",
+                        t.id === "theme-radiohead" &&
+                          "bg-linear-to-br from-[oklch(0.68_0.14_155_/_0.45)] to-[oklch(0.205_0_0_/_0.08)]"
                       )}
                     />
                     <div className="absolute inset-0 ring-1 ring-border/20 rounded-xl" />
 
-                    {/* bottom-right dot like screenshot */}
+                    {/* bottom-right dot */}
                     <div
                       className={cn(
                         "absolute bottom-2 right-2 h-2 w-2 rounded-full bg-foreground transition-opacity",

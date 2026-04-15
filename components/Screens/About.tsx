@@ -39,7 +39,7 @@ export default function About() {
       </div>
 
       {/* Bottom */}
-      <div className="mt-36 h-px w-full bg-border/30" />
+      <div className="mt-28 h-px w-full bg-border/30" />
 
       <footer className="mt-4 flex items-center justify-between">
         <div className="flex items-center gap-3">

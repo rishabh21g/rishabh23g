@@ -207,6 +207,15 @@
     position: relative;
     isolation: isolate;
     background: var(--background);
+    
+  }
+   .no-scrollbar::-webkit-scrollbar{
+  display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   .desktop-bg::before {

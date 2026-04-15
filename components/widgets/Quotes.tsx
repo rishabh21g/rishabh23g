@@ -72,7 +72,7 @@ export default function Quotes() {
                 exit={{ opacity: 0, x: -10, transition: { duration: 0.18, ease: "easeIn" } }}
                 className="min-h-6"
               >
-                <div className="text-sm text-center leading-relaxed text-foreground/85">
+                <div className="text-sm text-center leading-relaxed text-foreground/85  italic">
                   {q.text}
                 </div>
                 {q.author ? (

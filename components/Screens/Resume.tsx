@@ -2,6 +2,7 @@ import React from "react";
 import { RESUME, type ResumeLink, type ResumeProject } from "@/constants/RESUME";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Mail, MapPin } from "lucide-react";
+import Image from "next/image";
 
 function displayFromLink(link: ResumeLink) {
   const href = link.href;
@@ -168,19 +169,16 @@ export default function Resume() {
           </div>
         </div>
 
-        {viewLink ? (
-          <Button
-            asChild
-            variant="outline"
-            size="sm"
-            className="bg-background/20 backdrop-blur-md border-border/30"
-          >
-            <a href={viewLink.href} target="_blank" rel="noreferrer">
-              <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-              View online
-            </a>
-          </Button>
-        ) : null}
+        <div className="shrink-0">
+          <Image
+            src="/dp.jpeg"
+            alt={RESUME.basics.name}
+            width={56}
+            height={56}
+            className="h-14 w-14 rounded-full ring-1 ring-border/30 object-cover bg-muted/30"
+            priority
+          />
+        </div>
       </div>
 
       <div className="mt-5 h-px w-full bg-border/30" />

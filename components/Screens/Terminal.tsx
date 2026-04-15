@@ -306,8 +306,8 @@ export default function Terminal() {
         ))}
       </div>
 
-      <div className="mt-3 pt-3 border-t border-border/20">
-        <div className="flex items-center gap-2 text-foreground/80">
+      <div className="mt-3 pt-3 border-t border-border/20 no-scrollbar">
+        <div className="flex items-center gap-2 text-foreground/80 no-scrollbar">
           <span className="shrink-0 opacity-80">{promptLeft}</span>
           <span className="shrink-0 text-muted-foreground/70">{promptCwd}</span>
           <span className="shrink-0 opacity-80">%</span>
@@ -316,7 +316,7 @@ export default function Terminal() {
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-foreground/80 placeholder:text-muted-foreground/40 overflow-hidden scroll-none"
+            className="flex-1 bg-transparent outline-none text-foreground/80 placeholder:text-muted-foreground/40 overflow-hidden no-scrollbar"
             autoCapitalize="none"
             autoFocus={true}
             autoCorrect="off"
@@ -360,7 +360,6 @@ export default function Terminal() {
             }}
             placeholder='Type "help"…'
           />
-          <span className="w-2 h-4 bg-foreground/60 animate-pulse rounded-sm" aria-hidden="true" />
         </div>
       </div>
     </div>

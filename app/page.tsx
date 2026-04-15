@@ -2,11 +2,7 @@
 
 import MenuBar from "@/components/desktop/MenuBar";
 import Desktop from "@/components/desktop/Desktop";
-
-import About from "@/components/Screens/About";
-import Experience from "@/components/Screens/Experience";
 import Resume from "@/components/Screens/Resume";
-import Contact from "@/components/Screens/Contact";
 
 // widgets...
 import Weather from "@/components/widgets/Weather";
@@ -17,7 +13,23 @@ import Visitors from "@/components/widgets/Visitors";
 import Music from "@/components/widgets/Music";
 import ThemeCard from "@/components/widgets/ThemeCard";
 
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+
 export default function Home() {
+
+  const resumeRef = useRef<HTMLElement | null>(null);
+
+  const { scrollYProgress: resumeProgress } = useScroll({
+    target: resumeRef,
+    offset: ["start 1.85", "start 0.25"],
+  });
+
+  const fast = useTransform(resumeProgress, [0, 0.35], [0, 1], { clamp: true });
+  const resumeY = useTransform(fast, [0, 1], [24, 0]);
+  const resumeOpacity = useTransform(fast, [0, 1], [0, 1]);
+  const resumeFilter = useTransform(fast, [0, 1], ["blur(14px)", "blur(0px)"]);
+
   return (
     <main className="desktop-bg min-h-screen w-screen overflow-x-hidden sm:overflow-hidden">
 
@@ -35,40 +47,17 @@ export default function Home() {
       </div>
 
       {/* Mobile layout */}
-      <div className="block sm:hidden pt-7 px-4 pb-10">
-        <div
-          className="
-            sticky top-0 z-10
-            -mx-4 px-4
-            flex items-center gap-6
-            h-12
-            text-[0.7rem] uppercase tracking-[0.25em] text-muted-foreground/60
-            overflow-x-auto whitespace-nowrap
-            backdrop-blur-3xl bg-background/30 border-b border-border/30
-          "
+      <div className="block sm:hidden pt-2 px-4 pb-3 mx-6">
+
+        <motion.section
+          id="resume"
+          ref={resumeRef}
+          className="pt-12 scroll-mt-16"
+          style={{ y: resumeY, opacity: resumeOpacity, filter: resumeFilter }}
         >
-          <a href="#about" className="text-foreground/90 border-b border-foreground/40 pb-2">About</a>
-          <a href="#experience" className="pb-2">Experience</a>
-          <a href="#resume" className="pb-2">Projects</a>
-          <a href="#contact" className="pb-2">Contact</a>
-          <a href="#resume" className="pb-2">Résumé</a>
-        </div>
-
-        <div id="about" className="pt-6">
-          <About />
-        </div>
-
-        <div id="experience" className="pt-12">
-          <Experience />
-        </div>
-
-        <div id="resume" className="pt-12">
+          <MenuBar />
           <Resume />
-        </div>
-
-        <div id="contact" className="pt-12">
-          <Contact />
-        </div>
+        </motion.section>
       </div>
     </main>
   );
