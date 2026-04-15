@@ -30,13 +30,13 @@ export default function CalendarComp() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-      <Card className="w-fit bg-background/20 backdrop-blur-3xl border border-border/30">
+      <Card className="w-fit bg-card/80 backdrop-blur-3xl border border-border/30">
         <div
           onPointerDown={(e) => dragControls.start(e.nativeEvent)}
           className="
             flex items-center justify-center
              py-2
-            bg-background/20 backdrop-blur-3xl
+            bg-card/60 backdrop-blur-3xl
             cursor-grab active:cursor-grabbing
             select-none
           "

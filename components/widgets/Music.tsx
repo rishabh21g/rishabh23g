@@ -51,7 +51,7 @@ export default function Music() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-      <Card className="w-xs bg-background/20 backdrop-blur-3xl border border-border/30">
+      <Card className="w-xs bg-card/80 backdrop-blur-3xl border border-border/30">
         <CardContent className="p-0.5">
           <div
             onPointerDown={(e) => dragControls.start(e.nativeEvent)}

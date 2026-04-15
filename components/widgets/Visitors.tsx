@@ -36,7 +36,7 @@ export default function Visitors() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-      <Card className="w-44 bg-background/20 backdrop-blur-3xl border border-border/30">
+      <Card className="w-44 bg-card/80 backdrop-blur-3xl border border-border/30">
         <CardContent className="p-0.5">
           {/* handle */}
           <div

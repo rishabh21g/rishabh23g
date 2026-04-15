@@ -40,7 +40,7 @@ export default function ThemeCard() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-      <Card className="w-[min(220px,calc(100vw-4rem))] bg-background/20 backdrop-blur-3xl border border-border/30">
+      <Card className="w-[min(220px,calc(100vw-4rem))] bg-card/80 backdrop-blur-3xl border border-border/30">
         <CardContent className="p-0.5">
           {/* handle */}
           <div

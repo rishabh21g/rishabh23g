@@ -104,7 +104,7 @@ export default function Weather() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-      <Card className="w-52 bg-background/20 backdrop-blur-3xl border border-border/30">
+      <Card className="w-52 bg-card/80 backdrop-blur-3xl border border-border/30">
         <CardContent className="p-0.5">
           <div
             onPointerDown={(e) => dragControls.start(e.nativeEvent)}

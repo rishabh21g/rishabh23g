@@ -49,7 +49,7 @@ export default function Window({
       <Card
         className={cn(
           "max-h-2/4 overflow-hidden",
-          "bg-background backdrop-blur-3xl border border-border/30 shadow-none",
+          "bg-card/85 backdrop-blur-3xl border border-border/30 shadow-none",
           "py-1 gap-0",
           isActive ? "ring-1 ring-border/60  shadow-accent" : "ring-1 ring-border/20"
         )}
@@ -58,7 +58,7 @@ export default function Window({
           onPointerDown={(e) => dragControls.start(e.nativeEvent)}
           className={cn(
             "relative flex items-center px-3 py-2 select-none",
-            "border-b border-border/30 bg-background/10 backdrop-blur-3xl",
+            "border-b border-border/30 bg-card/60 backdrop-blur-3xl",
             "cursor-grab active:cursor-grabbing"
           )}
         >

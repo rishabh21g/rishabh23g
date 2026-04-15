@@ -73,8 +73,8 @@ export default function GithubStreak() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-      <Card className="w-fit bg-background/20 backdrop-blur-3xl border border-border/30">
-        <div className="border-b border-border/30 bg-background/10 backdrop-blur-3xl">
+      <Card className="w-fit bg-card/80 backdrop-blur-3xl border border-border/30">
+        <div className="border-b border-border/30 bg-card/60 backdrop-blur-3xl">
           {/* Drag handle row */}
           <div
             onPointerDown={(e) => dragControls.start(e.nativeEvent)}
