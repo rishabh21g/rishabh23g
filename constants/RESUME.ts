@@ -146,7 +146,7 @@ export const RESUME: ResumeData = {
   ],
 
   skills: {
-    languages: ["JavaScript", "TypeScript", "Golang", "SQL", "Java", "Python", "HTML"],
+    languages: ["JavaScript", "TypeScript", "Golang", "SQL",  "Python", "HTML"],
     librariesFrameworks: [
       "React.js",
       "Next.js",
@@ -157,9 +157,9 @@ export const RESUME: ResumeData = {
       "Go-Gin",
       "Shadcn",
       "Tailwind CSS",
-      "Redux-toolkit",
+      "Zustand",
     ],
-    database: ["MongoDB", "PostgeSQL", "Supabase", "Firebase"],
+    database: ["Redis", "PostgeSQL", "Supabase", "Firebase"],
     toolsOS: ["Windows", "Linux (Ubuntu)", "Github", "Docker", "Git", "NPM", "VSCode", "Vercel"],
     theoretical: [
       "Operating System",
