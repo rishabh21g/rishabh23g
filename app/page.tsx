@@ -36,7 +36,17 @@ export default function Home() {
 
       {/* Mobile layout */}
       <div className="block sm:hidden pt-7 px-4 pb-10">
-        <div className="flex gap-6 text-[0.7rem] uppercase tracking-[0.25em] text-muted-foreground/60 overflow-x-auto whitespace-nowrap">
+        <div
+          className="
+            sticky top-0 z-10
+            -mx-4 px-4
+            flex items-center gap-6
+            h-12
+            text-[0.7rem] uppercase tracking-[0.25em] text-muted-foreground/60
+            overflow-x-auto whitespace-nowrap
+            backdrop-blur-3xl bg-background/30 border-b border-border/30
+          "
+        >
           <a href="#about" className="text-foreground/90 border-b border-foreground/40 pb-2">About</a>
           <a href="#experience" className="pb-2">Experience</a>
           <a href="#resume" className="pb-2">Projects</a>
