@@ -19,7 +19,7 @@ export const REGISTRY: Record<DockAppId, { title: string; Component: React.Compo
   contact: { left: 260, top: 140 },
   terminal: { left: 140, top: 180 },
   resume: { left: 420, top: 100 },
-  system: { left: 300, top: 180 },
+  system: { left: 700, top: 180 },
   notes: { left: 340, top: 120 },
 };
 

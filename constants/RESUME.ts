@@ -137,7 +137,7 @@ export const RESUME: ResumeData = {
       company: "SocialZone",
       role: "Freelance Developer",
       start: "Feb 2025",
-      end: "Present",
+      end: "May 2025",
       location: "Remote",
       highlights: [
         "Developed the company’s official website using React.js, Framer Motion, and Tailwind CSS with lazy loading, asset optimization, and a scalable design system.",
