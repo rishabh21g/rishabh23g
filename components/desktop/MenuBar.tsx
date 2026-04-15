@@ -21,10 +21,7 @@ const MenuBar = () => {
       </div>
 
       <div className="flex items-center gap-4 text-sm text-foreground/80">
-        <div className="flex items-center gap-1">
-          <ArrowUp className="h-3 w-3" />
-          <span>3,371</span>
-        </div>
+  
         <Connection/>
         <Battery/>
         <Clock />

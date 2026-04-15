@@ -47,7 +47,7 @@ export default function Visitors() {
 
           {/* content */}
           <div className="text-center select-none">
-            <div className="text-xs tracking-tighter text-muted-foreground/50 ">
+            <div className="text-[0.65rem] uppercase tracking-[0.35em] text-muted-foreground/50 ">
               VISITORS
             </div>
 

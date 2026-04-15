@@ -58,7 +58,7 @@ export default function Quotes() {
           {/* header */}
           <div className="px-4 pb-2 select-none">
             <div className="text-[0.65rem] uppercase tracking-[0.35em] text-muted-foreground/70">
-              QUOTE
+              QUOTES
             </div>
           </div>
 
