@@ -160,7 +160,7 @@ export const RESUME: ResumeData = {
       "Tailwind CSS",
       "Zustand",
     ],
-    database: ["Redis", "PostgeSQL", "Supabase", "Firebase"],
+    database: ["Redis", "PostgresSQL", "Supabase", "Firebase"],
     toolsOS: ["Windows", "Linux (Ubuntu)", "Github", "Docker", "Git", "NPM", "VSCode", "Vercel"],
     theoretical: [
       "Operating System",

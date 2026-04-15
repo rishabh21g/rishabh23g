@@ -3,6 +3,7 @@
 import MenuBar from "@/components/desktop/MenuBar";
 import Desktop from "@/components/desktop/Desktop";
 import Resume from "@/components/Screens/Resume";
+import Mobile from "@/components/mobile/Mobile";
 
 // widgets...
 import Weather from "@/components/widgets/Weather";
@@ -13,26 +14,12 @@ import Visitors from "@/components/widgets/Visitors";
 import Music from "@/components/widgets/Music";
 import ThemeCard from "@/components/widgets/ThemeCard";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 
 export default function Home() {
 
-  const resumeRef = useRef<HTMLElement | null>(null);
-
-  const { scrollYProgress: resumeProgress } = useScroll({
-    target: resumeRef,
-    offset: ["start 1.85", "start 0.25"],
-  });
-
-  const fast = useTransform(resumeProgress, [0, 0.35], [0, 1], { clamp: true });
-  const resumeY = useTransform(fast, [0, 1], [24, 0]);
-  const resumeOpacity = useTransform(fast, [0, 1], [0, 1]);
-  const resumeFilter = useTransform(fast, [0, 1], ["blur(14px)", "blur(0px)"]);
-
+ 
   return (
     <main className="desktop-bg min-h-screen w-screen overflow-x-hidden sm:overflow-hidden">
-
       {/* Desktop layout */}
       <div className="hidden sm:block">
         <MenuBar />
@@ -47,17 +34,8 @@ export default function Home() {
       </div>
 
       {/* Mobile layout */}
-      <div className="block sm:hidden pt-2 px-4 pb-3 mx-6">
-
-        <motion.section
-          id="resume"
-          ref={resumeRef}
-          className="pt-12 scroll-mt-16"
-          style={{ y: resumeY, opacity: resumeOpacity, filter: resumeFilter }}
-        >
-          <MenuBar />
-          <Resume />
-        </motion.section>
+      <div className="block sm:hidden">
+        <Mobile />
       </div>
     </main>
   );
