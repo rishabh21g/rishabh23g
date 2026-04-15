@@ -1,6 +1,8 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
 import { Clock } from './Clock';
+import Battery from './Battery'
+import Connection from './Connection';
 
 const MenuBar = () => {
   return (
@@ -23,6 +25,8 @@ const MenuBar = () => {
           <ArrowUp className="h-3 w-3" />
           <span>3,371</span>
         </div>
+        <Connection/>
+        <Battery/>
         <Clock />
       </div>
     </header>

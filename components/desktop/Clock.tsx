@@ -33,9 +33,9 @@ export function Clock() {
   });
 
   return (
-    <div className="flex items-center gap-2 text-sm text-primary tabular-nums">
-      <span >{formattedDate}</span>
-      <span className="text-primary/80">{formattedTime}</span>
-    </div>
-  );
+  <div className="flex items-center gap-2 text-xs text-muted-foreground tabular-nums">
+    <span>{formattedDate}</span>
+    <span className="text-xs text-muted-foreground/80 tabular-nums">{formattedTime}</span>
+  </div>
+)
 }
