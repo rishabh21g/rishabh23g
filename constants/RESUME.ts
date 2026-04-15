@@ -90,6 +90,7 @@ export type ResumeData = {
   experience: ResumeExperience[];
   skills: ResumeSkills;
   projects: ResumeProject[];
+  client_projects?: ResumeProject[]; 
   education: ResumeEducation[];
   achievements: ResumeAchievement[];
   systems :ResumeSystemsSection[]
@@ -207,6 +208,26 @@ export const RESUME: ResumeData = {
         "Integrated PostgreSQL for user management, dynamic HTML templates, and Mailpit for SMTP testing.",
       ],
       stack: ["Go", "Gin", "JWT", "PostgreSQL", "Mailpit"],
+    },
+  ],
+  client_projects:[
+    {
+      name: "Doctor Portfolio",
+      subtitle: "Personal Website for a Doctor with appointment scheduling",
+      links: [
+        {
+          key: "live",
+          label: "Live",
+          href: "https://drreemabhatt.in/",
+          icon: FaEarthAsia,
+        },
+      ],
+      highlights: [
+        "Designed and developed a personal portfolio website for Dr. Satyarth, showcasing his medical expertise and services.",
+        "Implemented a clean and responsive design using React.js and Tailwind CSS, ensuring optimal user experience across devices.",
+        "Integrated contact forms and appointment scheduling features to enhance patient engagement.",
+      ],
+      stack: ["React", "Tailwind CSS", "Vercel"],
     },
   ],
 
