@@ -14,7 +14,7 @@ export default function Dock({ activeIds, onToggle }: DockProps) {
   const mouseX = useMotionValue<number | null>(null);
 
   return (
-    <div className="fixed bottom-6 left-0 right-0 z-50 flex justify-center">
+    <div className="fixed bottom-6 left-0 right-0 z-100 flex justify-center">
       <motion.div
         onMouseMove={(e) => mouseX.set(e.clientX)}
         onMouseLeave={() => mouseX.set(null)}

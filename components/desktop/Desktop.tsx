@@ -25,7 +25,7 @@ const REGISTRY: Record<DockAppId, { title: string; Component: React.ComponentTyp
 };
 
 const DEFAULT_POS: Record<DockAppId, { left: number; top: number }> = {
-  about: { left: 180, top: 90 },
+  about: { left: 520, top: 50 },
   experience: { left: 110, top: 130 },
   contact: { left: 260, top: 140 },
   terminal: { left: 140, top: 180 },

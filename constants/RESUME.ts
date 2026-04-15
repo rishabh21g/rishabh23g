@@ -29,6 +29,9 @@ export type ResumeBasics = {
   location: string;
   email: string;
   phone: string;
+  handle: string;
+  age:number;
+  avatarSrc?: string,
   links: ResumeLink[];
 };
 
@@ -74,7 +77,7 @@ export type ResumeSkills = {
 
 export type ResumeData = {
   basics: ResumeBasics;
-  summary: string[]; // optional short “about” bullets
+  summary: string
   experience: ResumeExperience[];
   skills: ResumeSkills;
   projects: ResumeProject[];
@@ -85,10 +88,13 @@ export type ResumeData = {
 export const RESUME: ResumeData = {
   basics: {
     name: "Rishabh Gupta",
-    headline: "Software Engineer",
+    headline: "Software Engineer / Fullstack Developer Golang + React Native",
     location: "Saket, New Delhi",
     email: "rishabhiitm@zohomail.in",
     phone: "+91 8840952165",
+    handle :"rishabh21g",
+    age :23,
+    avatarSrc: "/dp.jpeg",
     links: [
       { key: "portfolio", label: "Portfolio", href: "https://rishabh23g.vercel.app/", icon: FiGlobe },
       { key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/rishabh19g/", icon: FaLinkedin },
@@ -100,11 +106,7 @@ export const RESUME: ResumeData = {
     ],
   },
 
-  summary: [
-    "Promoted from Intern to SDE I for leading end-to-end development of a Canvas-based draw editor (React.js) and a cross-platform LMS app (React Native/Expo).",
-    "Built performant Go APIs with validations, rate limiting, and centralized error handling.",
-    "Designed efficient state management with TanStack Query, Context API, and custom hooks to reduce redundant re-renders.",
-  ],
+  summary: "Software Development Engineer specializing in Golang and JavaScript, with expertise in building scalable and modern web and mobile applications ",
 
   experience: [
     {

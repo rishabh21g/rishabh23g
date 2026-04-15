@@ -41,9 +41,9 @@ export default function Window({
     >
       <Card
         className={cn(
-          "w-[min(640px,calc(100vw-4rem))] max-h-2/4 overflow-hidden",
+          "w-[min(600px,calc(100vw-4rem))] max-h-2/4 overflow-hidden",
           "bg-background/20 backdrop-blur-3xl border border-border/30 shadow-none",
-          "py-0 gap-0", 
+          "py-1 gap-0", 
           isActive ? "ring-1 ring-border/60  shadow-accent" : "ring-1 ring-border/20"
         )}
       >
