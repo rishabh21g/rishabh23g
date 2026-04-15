@@ -34,7 +34,7 @@ export default function Desktop() {
   };
 
   return (
-    <>
+    <div className="w-full h-full">
       <MenuBar />
 
       {stack.map((id, idx) => {
@@ -55,6 +55,6 @@ export default function Desktop() {
       })}
 
       <Dock activeIds={activeIds} onToggle={toggleApp} />
-    </>
+    </div>
   );
 }
