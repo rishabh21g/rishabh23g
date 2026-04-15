@@ -15,7 +15,7 @@ export const REGISTRY: Record<DockAppId, { title: string; Component: React.Compo
 };
 
  export const DEFAULT_POS: Record<DockAppId, { left: number; top: number }> = {
-  about: { left: 520, top: 50 },
+  about: { left: 550, top: 130 },
   camera: { left: 800, top: 60 },
   experience: { left: 110, top: 130 },
   contact: { left: 260, top: 140 },
