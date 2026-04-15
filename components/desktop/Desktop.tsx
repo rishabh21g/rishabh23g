@@ -13,26 +13,9 @@ import Terminal from "@/components/Screens/Terminal";
 import Resume from "@/components/Screens/Resume";
 import System from "@/components/Screens/System";
 import Notes from "@/components/Screens/Notes";
+import { DEFAULT_POS,  REGISTRY,  } from "@/types/desktop";
 
-const REGISTRY: Record<DockAppId, { title: string; Component: React.ComponentType }> = {
-  about: { title: "ABOUT", Component: About },
-  contact: { title: "CONTACT", Component: Contact },
-  experience: { title: "EXPERIENCE", Component: Experience },
-  terminal: { title: "TERMINAL", Component: Terminal },
-  resume: { title: "RESUME", Component: Resume },
-  system: { title: "SYSTEM", Component: System },
-  notes: { title: "NOTES", Component: Notes },
-};
 
-const DEFAULT_POS: Record<DockAppId, { left: number; top: number }> = {
-  about: { left: 520, top: 50 },
-  experience: { left: 110, top: 130 },
-  contact: { left: 260, top: 140 },
-  terminal: { left: 140, top: 180 },
-  resume: { left: 220, top: 200 },
-  system: { left: 300, top: 180 },
-  notes: { left: 340, top: 120 },
-};
 
 export default function Desktop() {
   // About first (open by default)
@@ -46,7 +29,7 @@ export default function Desktop() {
     setStack((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
   };
 
-  const focusApp = (id: DockAppId) => {
+   const focusApp = (id: DockAppId) => {
     setStack((prev) => (prev.includes(id) ? [...prev.filter((x) => x !== id), id] : prev));
   };
 

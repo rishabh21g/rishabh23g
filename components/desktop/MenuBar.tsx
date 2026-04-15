@@ -8,7 +8,7 @@ const MenuBar = () => {
   return (
     <header
       className="
-        fixed top-0 left-0 right-0 z-50 h-7
+        fixed top-0 left-0 right-0 z-100 h-7
         bg-background/20 backdrop-blur-3xl
         border-b border-border/30
         flex items-center justify-between px-4

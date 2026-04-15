@@ -4,17 +4,9 @@ import React from "react";
 import { motion, useDragControls } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { WindowProps } from "@/types/window";
 
-type WindowProps = {
-  title: string;
-  children: React.ReactNode;
-  defaultPosition: { left: number; top: number };
-  zIndex: number;
-  isActive:boolean;
-  onClose: () => void;
-  onFocus?: () => void;
-  className?: string;
-};
+
 
 export default function Window({
   title,
@@ -41,7 +33,7 @@ export default function Window({
     >
       <Card
         className={cn(
-          "w-[min(600px,calc(100vw-4rem))] max-h-2/4 overflow-hidden",
+          "max-h-2/4 overflow-hidden",
           "bg-background/20 backdrop-blur-3xl border border-border/30 shadow-none",
           "py-1 gap-0", 
           isActive ? "ring-1 ring-border/60  shadow-accent" : "ring-1 ring-border/20"
@@ -79,7 +71,7 @@ export default function Window({
           <div className="ml-auto w-10" aria-hidden="true" />
         </div>
 
-        <div className="p-6 overflow-auto">{children}</div>
+        <div className={cn("p-6 overflow-auto", "contentClassName")}>{children}</div>
       </Card>
     </motion.div>
   );

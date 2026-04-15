@@ -62,7 +62,7 @@ export default function ThemeCard() {
 
           {/* tiles */}
           <div className="flex items-center gap-2 px-2 pb-4">
-            {THEMES.slice(0, 4).map((t) => {
+            {THEMES.map((t) => {
               const selected = t.id === active;
 
               return (
@@ -81,14 +81,14 @@ export default function ThemeCard() {
                       selected ? "ring-2 ring-foreground/60" : "hover:bg-muted/35"
                     )}
                   >
-                    {/* simple “cover” look using gradients, no new assets */}
                     <div
                       className={cn(
                         "absolute inset-0 opacity-90",
                         t.id === "theme-default" && "bg-linear-to-br from-muted/40 to-muted/10",
                         t.id === "theme-logic" && "bg-linear-to-br from-primary/35 to-muted/10",
                         t.id === "theme-midnight" && "bg-linear-to-br from-muted/50 to-background/10",
-                        t.id === "theme-weeknd" && "bg-linear-to-br from-primary/40 to-muted/10"
+                        t.id === "theme-weeknd" && "bg-linear-to-br from-primary/40 to-muted/10",
+                        t.id === "theme-radiohead" && "bg-linear-to-br from-lime-800 to-lime-950"
                       )}
                     />
                     <div className="absolute inset-0 ring-1 ring-border/20 rounded-xl" />
@@ -102,7 +102,7 @@ export default function ThemeCard() {
                     />
                   </div>
 
-                  <div className="mt-2 text-[0.65rem] uppercase tracking-[0.25em] text-muted-foreground/60">
+                  <div className="mt-2 text-[0.65rem] uppercase tracking-tighter text-muted-foreground/60 text-center">
                     {t.label}
                   </div>
                 </button>

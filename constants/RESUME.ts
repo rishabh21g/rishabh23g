@@ -22,6 +22,15 @@ export type ResumeLink = {
   href: string;
   icon: IconType;
 };
+export type ResumeSystemItem = {
+  name: string;
+  meta?: string; 
+};
+
+export type ResumeSystemsSection = {
+  title: string; 
+  items: ResumeSystemItem[];
+};
 
 export type ResumeBasics = {
   name: string;
@@ -83,6 +92,7 @@ export type ResumeData = {
   projects: ResumeProject[];
   education: ResumeEducation[];
   achievements: ResumeAchievement[];
+  systems :ResumeSystemsSection[]
 };
 
 export const RESUME: ResumeData = {
@@ -231,4 +241,48 @@ export const RESUME: ResumeData = {
       highlights: ["Secured third position in an inter-college chess competition."],
     },
   ],
+  systems: [
+  {
+    title: "HARDWARE",
+    items: [
+      { name: "MacBook Air M5", meta: "24GB · primary machine" },
+      { name: 'Mac Display', meta: "Liquid Retina XDR" },
+      { name: "Evofox Katana X2 TKL", meta: "Mechanical White" },
+      { name: "Truke BGT Ultra", meta: "for music" },
+    ],
+  },
+  {
+    title: "EDITOR",
+    items: [
+      { name: "VS Code", meta: "daily driver" },
+      { name: "Default Vs Code Dark+", meta: "theme" },
+      { name: "JetBrains Mono", meta: "font, 14px" },
+    ],
+  },
+  {
+    title: "TERMINAL",
+    items: [
+      { name: "iterm2", meta: "GPU-accelerated" },
+      { name: "zsh + Starship", meta: "prompt" },
+    ],
+  },
+  {
+    title: "TOOLS",
+    items: [
+      { name: "Notion", meta: "docs + writing" },
+      { name: "Excalidraw / GoDraw", meta: "UI work" },
+      { name: "TablePlus", meta: "DB client" },
+    ],
+  },
+  {
+    title: "STACK DEFAULTS",
+    items: [
+      { name: "Golang/Javascript", meta: "Backend" },
+      { name: "Next.js / React js", meta: "Web" },
+      { name: "React Native / Expo", meta: "Mobile" },
+      { name: "PostgreSQL + Redis", meta: "Data Layer" },
+      { name: "Vercel / Render / DigitalOcean", meta: "Deployment" },
+    ],
+  },
+],
 };
