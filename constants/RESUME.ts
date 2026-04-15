@@ -227,7 +227,7 @@ export const RESUME: ResumeData = {
         "Implemented a clean and responsive design using React.js and Tailwind CSS, ensuring optimal user experience across devices.",
         "Integrated contact forms and appointment scheduling features to enhance patient engagement.",
       ],
-      stack: ["React", "Tailwind CSS", "Vercel"],
+      stack: ["React", "Tailwind CSS", "Vercel" , "Resend" , "RestAPI" , "Google Map API"],
     },
   ],
 
