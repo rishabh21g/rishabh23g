@@ -107,7 +107,7 @@ export const RESUME: ResumeData = {
     age :23,
     avatarSrc: "/dp.jpeg",
     links: [
-      { key: "portfolio", label: "Portfolio", href: "https://rishabh23g.vercel.app/", icon: FiGlobe },
+      { key: "portfolio", label: "Portfolio", href: "https://rishabhiitm.me", icon: FiGlobe },
       { key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/rishabh19g/", icon: FaLinkedin },
       { key: "github", label: "GitHub", href: "https://github.com/rishabh21g", icon: FaGithub },
       { key: "mail", label: "Mail", href: "mailto:rishabhiitm@zohomail.in", icon: FiMail },
