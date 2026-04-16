@@ -209,6 +209,47 @@ export const RESUME: ResumeData = {
       ],
       stack: ["Go", "Gin", "JWT", "PostgreSQL", "Mailpit"],
     },
+    {
+  name: "AI Interview Mobile Application", 
+  subtitle: "AI-Powered Technical Interview Platform",
+  links: [
+    {
+      key: "repo",
+      label: "GitHub",
+      href: "https://github.com/rishabh21g/LK-interview-app.git",
+      icon: FaGithub,
+    },
+  ],
+  highlights: [
+    "Led the development of a cross-platform mobile app (React Native) for conducting AI-driven technical interviews.",
+    "Integrated real-time speech-to-text transcription and analysis to provide candidates with live feedback and generate performance metrics.",
+    "Engineered a system to securely record, process, and upload entire interview sessions for post-interview review by hiring managers.",
+    "Built a robust and secure authentication flow and managed complex application state using Zustand for a seamless user experience.",
+    "Focused on creating a responsive, high-performance mobile UI for both candidates and interviewers, ensuring smooth video/audio streaming.",
+  ],
+  stack: ["React Native", "TypeScript", "WebRTC", "Zustand", "AI/ML APIs", "Speech-to-Text" , "Video/Audio Processing", "Secure Authentication" ],
+},
+{
+  name: "AI Trip Planner",
+  subtitle: "Effortless, AI-powered trip recommendations",
+  links: [
+    {
+      key: "repo",
+      label: "GitHub",
+      href: "https://github.com/rishabh21g/Trip_planner", 
+      icon: FaGithub,
+    },
+  ],
+  highlights: [
+    "Developed a smart travel planner that generates personalized itineraries using the Gemini AI API.",
+    "Integrated the Google Places API to fetch and display top-rated destinations, including reviews and locations.",
+    "Implemented a real-time database with Firebase to securely save and sync user trip plans across devices.",
+    "Built a modern and responsive user interface using React.js, Tailwind CSS, and Shadcn UI.",
+    "Engineered a secure authentication system with Firebase Auth for user login and registration.",
+    "Created an interactive map view to help users visually explore and organize their travel destinations.",
+  ],
+  stack: ["React", "Tailwind CSS", "Shadcn UI", "Firebase", "Gemini AI", "Google Places API"],
+},
   ],
   client_projects:[
     {
@@ -276,15 +317,15 @@ export const RESUME: ResumeData = {
     title: "EDITOR",
     items: [
       { name: "VS Code", meta: "daily driver" },
-      { name: "Default Vs Code Dark+", meta: "theme" },
+      { name: "Dark Modern", meta: "theme" },
       { name: "JetBrains Mono", meta: "font, 14px" },
     ],
   },
   {
     title: "TERMINAL",
     items: [
-      { name: "iterm2", meta: "GPU-accelerated" },
-      { name: "zsh + Starship", meta: "prompt" },
+      { name: "Ghostty", meta: "GPU-accelerated" },
+      { name: "zsh", meta: "oh-my-zsh" },
     ],
   },
   {
