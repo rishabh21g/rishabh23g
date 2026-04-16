@@ -227,7 +227,7 @@ export const RESUME: ResumeData = {
     "Built a robust and secure authentication flow and managed complex application state using Zustand for a seamless user experience.",
     "Focused on creating a responsive, high-performance mobile UI for both candidates and interviewers, ensuring smooth video/audio streaming.",
   ],
-  stack: ["React Native", "TypeScript", "WebRTC", "Zustand", "AI/ML APIs", "Speech-to-Text" , "Video/Audio Processing", "Secure Authentication" ],
+  stack: ["React Native", "Expo", "Zustand", "AI/ML APIs", "Speech-to-Text" , "Video/Audio Processing", "Secure Authentication" ],
 },
 {
   name: "AI Trip Planner",
