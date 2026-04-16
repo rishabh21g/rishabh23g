@@ -225,7 +225,6 @@ export const RESUME: ResumeData = {
     "Integrated real-time speech-to-text transcription and analysis to provide candidates with live feedback and generate performance metrics.",
     "Engineered a system to securely record, process, and upload entire interview sessions for post-interview review by hiring managers.",
     "Built a robust and secure authentication flow and managed complex application state using Zustand for a seamless user experience.",
-    "Focused on creating a responsive, high-performance mobile UI for both candidates and interviewers, ensuring smooth video/audio streaming.",
   ],
   stack: ["React Native", "Expo", "Zustand", "AI/ML APIs", "Speech-to-Text" , "Video/Audio Processing", "Secure Authentication" ],
 },
