@@ -33,7 +33,7 @@ export default function ThemeCard() {
 
   return (
     <motion.div
-      className="absolute left-8 bottom-48 z-40"
+      className="absolute left-100 bottom-28 z-40"
       drag
       dragControls={dragControls}
       dragListener={false}

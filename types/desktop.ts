@@ -17,11 +17,11 @@ export const REGISTRY: Record<DockAppId, { title: string; Component: React.Compo
  export const DEFAULT_POS: Record<DockAppId, { left: number; top: number }> = {
   about: { left: 550, top: 130 },
   camera: { left: 800, top: 60 },
-  experience: { left: 110, top: 130 },
-  contact: { left: 260, top: 140 },
-  terminal: { left: 440, top: 130 },
-  resume: { left: 420, top: 100 },
+  experience: { left: 480, top: 130 },
+  contact: { left: 660, top: 140 },
+  terminal: { left: 540, top: 130 },
+  resume: { left: 520, top: 100 },
   system: { left: 700, top: 180 },
-  notes: { left: 340, top: 120 },
+  notes: { left: 890, top: 120 },
 };
 

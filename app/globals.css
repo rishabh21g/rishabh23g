@@ -228,19 +228,25 @@
     /* base */
     background-color: var(--background);
 
-    /* dotted pattern (uses theme foreground with low alpha) */
+    /* soft glow + dots */
     background-image:
       radial-gradient(
+        circle at 50% 20%,
+        oklch(from var(--primary) l c h / 0.09),
+        transparent 55%
+      ),
+      radial-gradient(
         circle,
-        oklch(from var(--foreground) l c h / 0.10) 1px,
+        oklch(from var(--foreground) l c h / 0.09) 0.8px,
         transparent 1px
       );
 
-    /* spacing between dots */
-    background-size: 30px 30px;
+    /* glow layer + dot grid spacing */
+    background-size: 100% 100%, 30px 30px;
+    background-position: center, 0 0;
 
-    /* soft vignette like the screenshot */
-    mask-image: radial-gradient(circle at center, black 25%, transparent 100%);
+    /* subtle vignette (optional, keep light) */
+    mask-image: radial-gradient(circle at center, black 70%, transparent 100%);
     opacity: 0.9;
   }
 }

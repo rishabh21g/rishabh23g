@@ -19,7 +19,6 @@ export interface DockIconProps {
 
   mouseX: MotionValue<number | null>;
 
-  // Tuning knobs (optional)
   radius?: number;
   maxScale?: number;
 }
@@ -30,8 +29,8 @@ export default function DockIcon({
   active,
   onClick,
   mouseX,
-  radius = 140,
-  maxScale = 1.38,
+  radius = 100,
+  maxScale = 1.18,
 }: DockIconProps) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -81,15 +80,15 @@ export default function DockIcon({
 
     await animate(bounce, 7, {
       type: "spring",
-      stiffness: 700,
-      damping: 18,
-      mass: 0.4,
+      stiffness: 200,
+      damping: 10,
+      mass: 0.1,
     });
 
     await animate(bounce, 0, {
       type: "spring",
-      stiffness: 700,
-      damping: 18,
+      stiffness: 300,
+      damping: 15,
       mass: 0.4,
     });
   };
@@ -108,7 +107,7 @@ export default function DockIcon({
       <div
         className={cn(
           "pointer-events-none absolute -top-16  whitespace-nowrap",
-          "rounded-md border border-border/40 bg-popover/80 px-2 py-1",
+          "rounded-md bg-popover/80 px-2 py-1",
           "text-xs font-medium tracking-wide text-primary backdrop-blur",
           "transition-all duration-150 z-85",
           hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
@@ -137,13 +136,12 @@ export default function DockIcon({
           variant="ghost"
           size="icon-lg"
           className={cn(
-            "h-10 w-10 rounded-xl p-3",
-            "bg-muted/90 ring-1 ring-border/30 backdrop-blur-md",
-            "hover:bg-muted/55",
+            "h-12 w-12 rounded-xl p-1",
+            "bg-muted  backdrop-blur-md",
             isEmphasized ? "text-primary" : "text-muted-foreground/70"
           )}
         >
-          <Icon className="h-6 w-6" />
+          <Icon className="h-10 w-10" />
         </Button>
 
         <div className={cn("mt-1 h-1 w-1 rounded-full bg-primary", active ? "opacity-100" : "opacity-0")} />

@@ -55,7 +55,7 @@ export default function Music() {
         <CardContent className="p-0.5">
           <div
             onPointerDown={(e) => dragControls.start(e.nativeEvent)}
-            className="flex items-center justify-center pb-2 cursor-grab active:cursor-grabbing select-none"
+            className="flex items-center justify-center pb-2 cursor-grab active:cursor-grabbing select-none "
           >
             <span className="h-0.5 w-12 rounded-full bg-primary/90" aria-hidden="true" />
           </div>

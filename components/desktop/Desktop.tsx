@@ -20,7 +20,7 @@ import { AnimatePresence } from "framer-motion";
 
 export default function Desktop() {
   // About first (open by default)
-  const [stack, setStack] = useState<DockAppId[]>(["terminal"]); 
+  const [stack, setStack] = useState<DockAppId[]>(["about"]); 
 
   const activeId = stack[stack.length - 1];
 

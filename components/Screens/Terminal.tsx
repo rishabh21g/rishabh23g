@@ -278,7 +278,7 @@ export default function Terminal() {
   return (
     <div
       className={[
-        "h-105 w-190 max-w-[92vw] max-h-[55vh]",
+        "h-105 w-150 max-w-[92vw] max-h-[55vh]",
         "flex flex-col",
         "font-mono select-text",
       ].join(" ")}
@@ -288,7 +288,7 @@ export default function Terminal() {
         ref={scrollerRef}
         className={[
           "flex-1 overflow-y-auto pr-2",
-          "text-[0.95rem] leading-relaxed",
+          "text-[0.8rem] leading-relaxed",
           "text-muted-foreground/65",
           "whitespace-pre-wrap",
         ].join(" ")}

@@ -29,7 +29,7 @@ export default function Visitors() {
 
   return (
     <motion.div
-      className="absolute left-8 top-56 z-40"
+      className="absolute left-8 bottom-46 z-40"
       drag
       dragControls={dragControls}
       dragListener={false}
