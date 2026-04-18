@@ -1,8 +1,8 @@
 import React from 'react';
-import { ArrowUp } from 'lucide-react';
 import { Clock } from './Clock';
 import Battery from './Battery'
 import Connection from './Connection';
+import { ThemeMode } from './ThemeMode';
 
 const MenuBar = () => {
   return (
@@ -24,6 +24,7 @@ const MenuBar = () => {
   
         <Connection/>
         <Battery/>
+        <ThemeMode/>
         <Clock />
       </div>
     </header>

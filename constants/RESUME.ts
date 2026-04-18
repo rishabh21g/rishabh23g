@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import type { IconType } from "react-icons";
 
 import { FaGithub, FaLinkedin, FaInstagram, FaSpotify } from "react-icons/fa";
@@ -24,11 +23,11 @@ export type ResumeLink = {
 };
 export type ResumeSystemItem = {
   name: string;
-  meta?: string; 
+  meta?: string;
 };
 
 export type ResumeSystemsSection = {
-  title: string; 
+  title: string;
   items: ResumeSystemItem[];
 };
 
@@ -39,7 +38,7 @@ export type ResumeBasics = {
   email: string;
   phone: string;
   handle: string;
-  age:number;
+  age: number;
   avatarSrc?: string,
   links: ResumeLink[];
 };
@@ -90,10 +89,10 @@ export type ResumeData = {
   experience: ResumeExperience[];
   skills: ResumeSkills;
   projects: ResumeProject[];
-  client_projects?: ResumeProject[]; 
+  client_projects?: ResumeProject[];
   education: ResumeEducation[];
   achievements: ResumeAchievement[];
-  systems :ResumeSystemsSection[]
+  systems: ResumeSystemsSection[]
 };
 
 export const RESUME: ResumeData = {
@@ -103,8 +102,8 @@ export const RESUME: ResumeData = {
     location: "Saket, New Delhi",
     email: "rishabhiitm@zohomail.in",
     phone: "+91 8840952165",
-    handle :"rishabh21g",
-    age :23,
+    handle: "rishabh21g",
+    age: 23,
     avatarSrc: "/dp.jpeg",
     links: [
       { key: "portfolio", label: "Portfolio", href: "https://rishabhiitm.me", icon: FiGlobe },
@@ -147,7 +146,7 @@ export const RESUME: ResumeData = {
   ],
 
   skills: {
-    languages: ["JavaScript", "TypeScript", "Golang", "SQL",  "Python", "HTML"],
+    languages: ["JavaScript", "TypeScript", "Golang", "SQL", "Python", "HTML"],
     librariesFrameworks: [
       "React.js",
       "Next.js",
@@ -192,6 +191,26 @@ export const RESUME: ResumeData = {
       stack: ["React", "Go", "WebSocket", "Yjs", "PostgreSQL", "Docker", "Nginx"],
     },
     {
+      name: " Web Crawler",
+      subtitle: "A Go-based web crawler using a producer-consumer pattern (In Progress...)",
+      links: [
+        {
+          key: "repo",
+          label: "GitHub",
+          href: "https://github.com/rishabh21g/web-crawler",
+          icon: FaGithub,
+        },
+      ],
+      highlights: [
+        "Built a concurrent web crawler in Go using producer–consumer pattern (10 goroutines/workers) with channels + sync.WaitGroup to crawl pages in parallel.",
+        "Implemented a thread-safe scheduler (mutex-protected Seen map) to enforce domain allowlisting + depth limit (MaxDepth=2) and prevent duplicate URL processing.",
+        "Developed an HTTP fetcher with context cancellation and strict validation: 10s timeout, Content-Type must include text/html, max response size 5MB to avoid memory blowups.",
+        "Implemented HTML link extraction using golang.org/x/net/html, resolving relative URLs to absolute and filtering junk schemes (#, mailto:, javascript:, tel:).",
+        "Added backpressure handling via a buffered task channel (size 100) and non-blocking enqueue (drops when full) to keep workers responsive under high fan-out.",
+      ],
+      stack: ["Go", "Goroutines", "Channels"],
+    },
+    {
       name: "MailGo",
       subtitle: "Concurrent Email Sender",
       links: [
@@ -210,47 +229,47 @@ export const RESUME: ResumeData = {
       stack: ["Go", "Gin", "JWT", "PostgreSQL", "Mailpit"],
     },
     {
-  name: "AI Interview Mobile Application", 
-  subtitle: "AI-Powered Technical Interview Platform",
-  links: [
+      name: "AI Interview Mobile Application",
+      subtitle: "AI-Powered Technical Interview Platform",
+      links: [
+        {
+          key: "repo",
+          label: "GitHub",
+          href: "https://github.com/rishabh21g/LK-interview-app.git",
+          icon: FaGithub,
+        },
+      ],
+      highlights: [
+        "Led the development of a cross-platform mobile app (React Native) for conducting AI-driven technical interviews.",
+        "Integrated real-time speech-to-text transcription and analysis to provide candidates with live feedback and generate performance metrics.",
+        "Engineered a system to securely record, process, and upload entire interview sessions for post-interview review by hiring managers.",
+        "Built a robust and secure authentication flow and managed complex application state using Zustand for a seamless user experience.",
+      ],
+      stack: ["React Native", "Expo", "Zustand", "AI/ML APIs", "Speech-to-Text", "Video/Audio Processing", "Secure Authentication"],
+    },
     {
-      key: "repo",
-      label: "GitHub",
-      href: "https://github.com/rishabh21g/LK-interview-app.git",
-      icon: FaGithub,
+      name: "AI Trip Planner",
+      subtitle: "Effortless, AI-powered trip recommendations",
+      links: [
+        {
+          key: "repo",
+          label: "GitHub",
+          href: "https://github.com/rishabh21g/Trip_planner",
+          icon: FaGithub,
+        },
+      ],
+      highlights: [
+        "Developed a smart travel planner that generates personalized itineraries using the Gemini AI API.",
+        "Integrated the Google Places API to fetch and display top-rated destinations, including reviews and locations.",
+        "Implemented a real-time database with Firebase to securely save and sync user trip plans across devices.",
+        "Built a modern and responsive user interface using React.js, Tailwind CSS, and Shadcn UI.",
+        "Engineered a secure authentication system with Firebase Auth for user login and registration.",
+        "Created an interactive map view to help users visually explore and organize their travel destinations.",
+      ],
+      stack: ["React", "Tailwind CSS", "Shadcn UI", "Firebase", "Gemini AI", "Google Places API"],
     },
   ],
-  highlights: [
-    "Led the development of a cross-platform mobile app (React Native) for conducting AI-driven technical interviews.",
-    "Integrated real-time speech-to-text transcription and analysis to provide candidates with live feedback and generate performance metrics.",
-    "Engineered a system to securely record, process, and upload entire interview sessions for post-interview review by hiring managers.",
-    "Built a robust and secure authentication flow and managed complex application state using Zustand for a seamless user experience.",
-  ],
-  stack: ["React Native", "Expo", "Zustand", "AI/ML APIs", "Speech-to-Text" , "Video/Audio Processing", "Secure Authentication" ],
-},
-{
-  name: "AI Trip Planner",
-  subtitle: "Effortless, AI-powered trip recommendations",
-  links: [
-    {
-      key: "repo",
-      label: "GitHub",
-      href: "https://github.com/rishabh21g/Trip_planner", 
-      icon: FaGithub,
-    },
-  ],
-  highlights: [
-    "Developed a smart travel planner that generates personalized itineraries using the Gemini AI API.",
-    "Integrated the Google Places API to fetch and display top-rated destinations, including reviews and locations.",
-    "Implemented a real-time database with Firebase to securely save and sync user trip plans across devices.",
-    "Built a modern and responsive user interface using React.js, Tailwind CSS, and Shadcn UI.",
-    "Engineered a secure authentication system with Firebase Auth for user login and registration.",
-    "Created an interactive map view to help users visually explore and organize their travel destinations.",
-  ],
-  stack: ["React", "Tailwind CSS", "Shadcn UI", "Firebase", "Gemini AI", "Google Places API"],
-},
-  ],
-  client_projects:[
+  client_projects: [
     {
       name: "Doctor Portfolio",
       subtitle: "Personal Website for a Doctor with appointment scheduling",
@@ -267,7 +286,7 @@ export const RESUME: ResumeData = {
         "Implemented a clean and responsive design using React.js and Tailwind CSS, ensuring optimal user experience across devices.",
         "Integrated contact forms and appointment scheduling features to enhance patient engagement.",
       ],
-      stack: ["React", "Tailwind CSS", "Vercel" , "Resend" , "RestAPI" , "Google Map API"],
+      stack: ["React", "Tailwind CSS", "Vercel", "Resend", "RestAPI", "Google Map API"],
     },
   ],
 
@@ -303,47 +322,46 @@ export const RESUME: ResumeData = {
     },
   ],
   systems: [
-  {
-    title: "HARDWARE",
-    items: [
-      { name: "MacBook Air M5", meta: "24GB · primary machine" },
-      { name: 'Mac Display', meta: "Liquid Retina XDR" },
-      { name: "Evofox Katana X2 TKL", meta: "Mechanical White" },
-      { name: "Truke BGT Ultra", meta: "for music" },
-    ],
-  },
-  {
-    title: "EDITOR",
-    items: [
-      { name: "VS Code", meta: "daily driver" },
-      { name: "Dark Modern", meta: "theme" },
-      { name: "JetBrains Mono", meta: "font, 14px" },
-    ],
-  },
-  {
-    title: "TERMINAL",
-    items: [
-      { name: "Ghostty", meta: "GPU-accelerated" },
-      { name: "zsh", meta: "oh-my-zsh" },
-    ],
-  },
-  {
-    title: "TOOLS",
-    items: [
-      { name: "Notion", meta: "docs + writing" },
-      { name: "Excalidraw / GoDraw", meta: "UI work" },
-      { name: "TablePlus", meta: "DB client" },
-    ],
-  },
-  {
-    title: "STACK DEFAULTS",
-    items: [
-      { name: "Golang/Javascript", meta: "Backend" },
-      { name: "Next.js / React js", meta: "Web" },
-      { name: "React Native / Expo", meta: "Mobile" },
-      { name: "PostgreSQL + Redis", meta: "Data Layer" },
-      { name: "Vercel / Render / DigitalOcean", meta: "Deployment" },
-    ],
-  },
-],
+    {
+      title: "HARDWARE",
+      items: [
+        { name: "MacBook Air M5", meta: "24GB · primary machine" },
+        { name: 'Mac Display', meta: "Liquid Retina XDR" },
+        { name: "Evofox Katana X2 TKL", meta: "Mechanical White" },
+        { name: "Truke BGT Ultra", meta: "for music" },
+      ],
+    },
+    {
+      title: "EDITOR",
+      items: [
+        { name: "VS Code", meta: "daily driver" },
+        { name: "Dark Modern", meta: "theme" },
+      ],
+    },
+    {
+      title: "TERMINAL",
+      items: [
+        { name: "Ghostty", meta: "GPU-accelerated" },
+        { name: "zsh", meta: "oh-my-zsh" },
+      ],
+    },
+    {
+      title: "TOOLS",
+      items: [
+        { name: "Notion", meta: "docs + writing" },
+        { name: "Excalidraw / GoDraw", meta: "UI work" },
+        { name: "TablePlus", meta: "DB client" },
+      ],
+    },
+    {
+      title: "STACK DEFAULTS",
+      items: [
+        { name: "Golang/Javascript", meta: "Backend" },
+        { name: "Next.js / React js", meta: "Web" },
+        { name: "React Native / Expo", meta: "Mobile" },
+        { name: "PostgreSQL + Redis", meta: "Data Layer" },
+        { name: "Vercel / Render ", meta: "Deployment" },
+      ],
+    },
+  ],
 };
