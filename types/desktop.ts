@@ -12,6 +12,7 @@ export const REGISTRY: Record<DockAppId, { title: string; Component: React.Compo
   resume: { title: "RESUME", Component: React.lazy(() => import("@/components/Screens/Resume")) },
   system: { title: "SYSTEM", Component: React.lazy(() => import("@/components/Screens/System")) },
   notes: { title: "NOTES", Component: React.lazy(() => import("@/components/Screens/Notes")) },
+  game : {title :"GAME" , Component: React.lazy(()=>import("@/components/Screens/Game") ) }
 };
 
  export const DEFAULT_POS: Record<DockAppId, { left: number; top: number }> = {
@@ -23,5 +24,7 @@ export const REGISTRY: Record<DockAppId, { title: string; Component: React.Compo
   resume: { left: 520, top: 100 },
   system: { left: 700, top: 180 },
   notes: { left: 890, top: 120 },
+  game: {left : 500 , top: 80}
+
 };
 

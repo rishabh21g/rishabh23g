@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Briefcase, Camera, Contact, Cpu, File, Notebook, Terminal, User } from "lucide-react";
+import { Briefcase, Camera, Contact, Cpu, File, Gamepad2Icon, Notebook, Terminal, User } from "lucide-react";
 
 export type DockAppId =
   | "about"
@@ -9,7 +9,9 @@ export type DockAppId =
   | "terminal"
   | "resume"
   | "system"
-  | "notes";
+  | "notes"
+  | "game"
+
 
 export type DockApp = {
   id: DockAppId;
@@ -26,4 +28,5 @@ export const APPS: DockApp[] = [
   { id: "resume", label: "RESUME", icon: File },
   { id: "system", label: "SYSTEM", icon: Cpu },
   { id: "notes", label: "NOTES", icon: Notebook },
+  {id:"game" , label:"GAME" , icon: Gamepad2Icon}
 ];
