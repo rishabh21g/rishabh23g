@@ -83,9 +83,15 @@ function ProjectLinkButton({ link }: { link: ResumeLink }) {
 function ProjectBlock({ project }: { project: ResumeProject }) {
   return (
     <div>
+      <div className="flex items-center gap-2 min-w-0">
+        <div className="text-sm font-semibold text-foreground/90 truncate">
+          {project.name}
+        </div>
+        <ProgressPill value={project.progress} />
+      </div>
+
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <div className="text-sm font-semibold text-foreground/90">{project.name}</div>
           {project.subtitle ? (
             <div className="mt-1 text-xs text-muted-foreground/60">{project.subtitle}</div>
           ) : null}
@@ -116,6 +122,28 @@ function ProjectBlock({ project }: { project: ResumeProject }) {
         ))}
       </ul>
     </div>
+  );
+}
+
+function ProgressPill({ value }: { value: string }) {
+  const v = value.toLowerCase();
+  const inProgress = v.includes("progress");
+  const closed = v.includes("closed") || v.includes("done");
+
+  return (
+    <span
+      className={[
+        "inline-flex items-center rounded-sm px-2 py-0.5 text-xs lowercase tracking-wide",
+        "ring-1",
+        inProgress
+          ? "bg-primary/10 text-foreground/80 ring-primary/20"
+          : closed
+            ? "bg-muted/20 text-muted-foreground/70 ring-border/25"
+            : "bg-muted/20 text-muted-foreground/70 ring-border/25",
+      ].join(" ")}
+    >
+      {value}
+    </span>
   );
 }
 

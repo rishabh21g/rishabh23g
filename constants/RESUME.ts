@@ -55,6 +55,7 @@ export type ResumeExperience = {
 export type ResumeProject = {
   name: string;
   subtitle?: string;
+  progress : string;
   links: ResumeLink[];
   highlights: string[];
   stack?: string[];
@@ -175,6 +176,7 @@ export const RESUME: ResumeData = {
     {
       name: "GoDraw",
       subtitle: "Free Infinite Whiteboard (PWA)",
+      progress:"In progress",
       links: [
         {
           key: "live",
@@ -193,6 +195,8 @@ export const RESUME: ResumeData = {
     {
       name: " Web Crawler",
       subtitle: "A Go-based web crawler using a producer-consumer pattern (In Progress...)",
+      progress:"In progress",
+
       links: [
         {
           key: "repo",
@@ -213,6 +217,8 @@ export const RESUME: ResumeData = {
     {
       name: "MailGo",
       subtitle: "Concurrent Email Sender",
+      progress:"In progress",
+
       links: [
         {
           key: "repo",
@@ -231,6 +237,8 @@ export const RESUME: ResumeData = {
     {
       name: "AI Interview Mobile Application",
       subtitle: "AI-Powered Technical Interview Platform",
+      progress:"Closed",
+
       links: [
         {
           key: "repo",
@@ -250,6 +258,8 @@ export const RESUME: ResumeData = {
     {
       name: "AI Trip Planner",
       subtitle: "Effortless, AI-powered trip recommendations",
+      progress:"Closed",
+
       links: [
         {
           key: "repo",
@@ -273,6 +283,8 @@ export const RESUME: ResumeData = {
     {
       name: "Doctor Portfolio",
       subtitle: "Personal Website for a Doctor with appointment scheduling",
+      progress:"Closed",
+
       links: [
         {
           key: "live",

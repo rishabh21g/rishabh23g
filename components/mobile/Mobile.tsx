@@ -22,6 +22,30 @@ function Chip({ children }: { children: React.ReactNode }) {
   );
 }
 
+function ProgressPill({ value }: { value?: string }) {
+  if (!value) return null;
+
+  const v = value.toLowerCase();
+  const inProgress = v.includes("progress");
+  const closed = v.includes("closed") || v.includes("done");
+
+  return (
+    <span
+      className={[
+        "inline-flex items-center rounded-sm px-2 py-0.5 text-xs lowercase tracking-wide",
+        "ring-1",
+        inProgress
+          ? "bg-primary/10 text-foreground/80 ring-primary/20"
+          : closed
+            ? "bg-muted/60 text-muted-foreground/70 ring-border/25"
+            : "bg-muted/60 text-muted-foreground/70 ring-border/25",
+      ].join(" ")}
+    >
+      {value}
+    </span>
+  );
+}
+
 function LinkButton({ link }: { link: ResumeLink }) {
   const Icon = link.icon;
   const external = isExternalHref(link.href);
@@ -196,7 +220,10 @@ export default function Mobile() {
                 <div key={p.name}>
                   <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
-                      <div className="text-sm font-semibold text-foreground/90">{p.name}</div>
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="text-sm font-semibold text-foreground/90 truncate">{p.name}</div>
+                        <ProgressPill value={(p as any).progress} />
+                      </div>
                       {p.subtitle ? <div className="mt-1 text-xs text-muted-foreground/60">{p.subtitle}</div> : null}
 
                       {p.stack?.length ? (

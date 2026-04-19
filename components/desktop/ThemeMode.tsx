@@ -4,9 +4,9 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { IoMdOptions } from "react-icons/io";
 import { CiDark, CiLight } from "react-icons/ci";
 import { useEffect } from "react";
+import { MacTogglesIcon } from "@/constants/MACICON";
 
 type COLORMODE = "dark" | "light"
 const MODE_KEY = "mode"
@@ -56,7 +56,7 @@ export function ThemeMode() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger >
-                <IoMdOptions className="h-4 w-4 text-foreground/80" aria-hidden="true" />
+                <MacTogglesIcon className="h-4 w-4 text-foreground/80" aria-hidden="true" />
 
             </DropdownMenuTrigger>
             <DropdownMenuContent>

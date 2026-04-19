@@ -5,10 +5,7 @@ import { Cell, Dir } from "@/types/game";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { BiReset } from "react-icons/bi";
 import { LuPause, LuPlay } from "react-icons/lu";
-import { MdClear } from "react-icons/md";
 import { Button } from "../ui/button";
-
-
 
 
 function eq(a: Cell, b: Cell) {
@@ -178,15 +175,15 @@ export default function Game() {
     }, [running, gameOver, food]);
 
     return (
-        <div className="flex flex-col items-center justify-center p-2  h-full max-h-[80vh] w-190 max-w-[92vw]">
-            <div className="w-full max-w-sm space-y-4">
+        <div className="flex flex-col items-center justify-center p-2 h-full w-full">
+            
+            <div className="w-full max-w-125 flex flex-col items-center space-y-2 mx-auto">
+                
                 {/* Header Stats */}
-                <div className="flex items-center justify-between px-1">
-                    <div className="text-[0.65rem] font-medium uppercase tracking-[0.25em] text-muted-foreground/70">
-                        Snake
-                    </div>
+                <div className="w-full flex items-center justify-between px-1">
+                   
 
-                    <div className="flex items-center gap-4 text-[0.65rem] font-medium tracking-wide text-muted-foreground/70">
+                    <div className="flex items-center gap-4 text-xs font-medium tracking-wide text-muted-foreground/70">
                         <span>
                             Score: <span className="text-primary">{score}</span>
                         </span>
@@ -200,25 +197,27 @@ export default function Game() {
                 </div>
 
                 {/* Game Board */}
-                <div className="rounded-xl border border-border/40 bg-card/40 p-2 shadow-sm backdrop-blur-md w-140 max-w-[92vw] flex items-center justify-center mx-auto">
+                <div className="rounded-xl border border-border/40 bg-card/40 p-2.5 shadow-sm backdrop-blur-md flex items-center justify-center">
+                   
                     <div
-                        className="mx-auto grid gap-1 w-full "
+                        className="grid gap-1 w-fit place-content-center"
                         style={{
-                            gridTemplateColumns: `repeat(${GRID}, minmax(0, 1fr))`,
+                            gridTemplateColumns: `repeat(${GRID}, minmax(13px, 13px))`, // forced square
+                            gridAutoRows: "13px" // forced square
                         }}
                     >
                         {cells.map((c) => (
                             <div
                                 key={c.key}
                                 className={[
-                                    "aspect-square rounded-sm transition-colors duration-75",
+                                    "rounded-[3px] transition-colors duration-75 block",
                                     c.isFood 
-                                        ? "bg-primary shadow-[0_0_8px_var(--primary)]" 
+                                        ? "bg-primary shadow-[0_0_8px_var(--color-primary)]" 
                                         : c.isHead 
                                             ? "bg-foreground" 
                                             : c.isSnake 
-                                                ? "bg-foreground/50" 
-                                                : "bg-muted/30 border border-border/10",
+                                                ? "bg-foreground/60" 
+                                                : "bg-background/20 ring-1 ring-inset ring-border/15 w-full h-full", 
                                 ].join(" ")}
                             />
                         ))}
@@ -254,7 +253,7 @@ export default function Game() {
                             localStorage.removeItem(BEST_KEY);
                             setBest(0);
                         }}
-                        className="h-8 px-3 rounded-full text-[0.65rem] text-muted-foreground/60 hover:text-destructive hover:bg-destructive/10"
+                        className="h-8 px-3 rounded-md text-xs text-muted-foreground/60  hover:text-destructive hover:bg-destructive/10"
                     >
                         Clear Best
                     </Button>
