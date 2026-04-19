@@ -59,7 +59,7 @@
   --primary-foreground: oklch(0.984 0.019 200.873);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.97 0 0);
+  --muted: oklch(0.87 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
@@ -115,6 +115,35 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* ---- View Transition theme reveal (bubble + blur) ---- */
+:root {
+  --vt-x: 100vw;
+  --vt-y: 0px;
+  --vt-r: 0px;
+}
+
+/* Don't let the UA cross-fade; we fully control it */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+/* New theme reveals as an expanding circle from (--vt-x, --vt-y) */
+::view-transition-new(root) {
+  animation: theme-reveal 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0px at var(--vt-x) var(--vt-y));
+    filter: blur(14px);
+  }
+  to {
+    clip-path: circle(var(--vt-r) at var(--vt-x) var(--vt-y));
+    filter: blur(0px);
+  }
 }
 
 /* ---- Theme overrides (dark + theme-*) ---- */

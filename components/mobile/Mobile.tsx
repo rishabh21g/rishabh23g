@@ -16,7 +16,7 @@ function isExternalHref(href: string) {
 
 function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full bg-muted/20 ring-1 ring-border/25 px-2.5 py-1 text-[0.65rem] text-foreground/80">
+    <span className="inline-flex items-center rounded-md bg-muted/60 ring-1 ring-border/25 px-2.5 py-1 text-[0.65rem] text-foreground/80">
       {children}
     </span>
   );
@@ -27,7 +27,7 @@ function LinkButton({ link }: { link: ResumeLink }) {
   const external = isExternalHref(link.href);
 
   return (
-    <Button asChild variant="outline" size="sm" className="bg-background/10 backdrop-blur-md border-border/30">
+    <Button asChild variant="outline" size="sm" className="bg-muted/60 backdrop-blur-md border-border/30">
       <a href={link.href} target={external ? "_blank" : undefined} rel={external ? "noreferrer noopener" : undefined}>
         <Icon className="h-3.5 w-3.5 text-muted-foreground/80" aria-hidden="true" />
         {link.label}
@@ -161,7 +161,7 @@ export default function Mobile() {
             <CardContent className="space-y-1">
               <div>
                 <div className="text-[0.7rem] uppercase tracking-tight text-muted-foreground/60">Languages</div>
-                <div className="mt-1 flex flex-wrap gap-1">{skills.languages.map((s) => <Chip key={s}>{s}</Chip>)}</div>
+                <div className="mt-1 flex flex-wrap gap-1 ">{skills.languages.map((s) => <Chip key={s}>{s}</Chip>)}</div>
               </div>
 
               <div>

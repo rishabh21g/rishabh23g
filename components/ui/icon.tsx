@@ -124,7 +124,7 @@ export default function DockIcon({
           runBounce();
         }}
         onPointerLeave={() => setHovered(false)}
-        className="flex flex-col items-center will-change-transform"
+        className="flex flex-col items-center will-change-transform "
       >
         <Button
           type="button"
@@ -137,7 +137,7 @@ export default function DockIcon({
           size="icon-lg"
           className={cn(
             "h-12 w-12 rounded-xl p-1",
-            "bg-muted  backdrop-blur-md",
+            "bg-muted/30  backdrop-blur-md",
             isEmphasized ? "text-primary" : "text-muted-foreground/70"
           )}
         >
