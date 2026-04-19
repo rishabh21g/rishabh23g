@@ -4,7 +4,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ContributionCalendar } from "@/types/github";
 import { FiGithub } from "react-icons/fi";
-import { motion, useDragControls } from "framer-motion";
+import { AnimatePresence, motion, useDragControls } from "framer-motion";
+
+const CACHE_KEY = "github_streak_cache";
+const CACHE_TTL = 1000 * 60 * 60 * 24; // 24 hours in milliseconds
 
 function levelForCount(count: number): 0 | 1 | 2 | 3 | 4 {
   if (count <= 0) return 0;
@@ -36,9 +39,24 @@ export default function GithubStreak() {
   const [calendar, setCalendar] = useState<ContributionCalendar | null>(null);
 
   const fetchContribution = async () => {
-    const response = await fetch(`/api/github?user=${username}`, {
-      cache: "no-store",
-    });
+    // 1. Check if we have valid cached data
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      try {
+        const { data, timestamp } = JSON.parse(cached);
+        // If cache is newer than 24 hours, use it and stop executing
+        if (Date.now() - timestamp < CACHE_TTL) {
+          setCalendar(data);
+          return;
+        }
+      } catch (err) {
+        console.error("Failed to parse cache", err);
+      }
+    }
+
+    // 2. If no cache or it expired, fetch fresh data
+    // Removed cache: "no-store" so the browser is also allowed to cache the network request
+    const response = await fetch(`/api/github?user=${username}`);
 
     if (!response.ok) {
       throw new Error("Failed to load Github streak!");
@@ -46,6 +64,12 @@ export default function GithubStreak() {
 
     const data = (await response.json()) as ContributionCalendar;
     setCalendar(data);
+
+    // 3. Save the fresh data to local storage for next time
+    localStorage.setItem(
+      CACHE_KEY,
+      JSON.stringify({ data, timestamp: Date.now() })
+    );
   };
 
   useEffect(() => {
@@ -73,80 +97,91 @@ export default function GithubStreak() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-      <Card className="w-fit bg-card/80 backdrop-blur-3xl border border-border/30">
-        <div className="border-b border-border/30 bg-card/60 backdrop-blur-3xl">
-          {/* Drag handle row */}
-          <div
-            onPointerDown={(e) => dragControls.start(e.nativeEvent)}
-            className="
-            bg-transparent
-              flex items-center justify-center
-              py-2
-              cursor-grab active:cursor-grabbing
-              select-none
-            "
+      {/* 
+        AnimatePresence handles the mounting animation. 
+        It will only render and animate the card once `calendar` is not null.
+      */}
+      <AnimatePresence initial={true}>
+        {calendar && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 8, filter: "blur(8px)" }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: { duration: 0.18, ease: "easeOut" },
+            }}
           >
-            <span className="h-0.5 w-12 rounded-full bg-primary/90" aria-hidden="true" />
-          </div>
+            <Card className="w-fit bg-card/80 backdrop-blur-3xl border border-border/30 shadow-sm">
+              <div className="border-b border-border/30 bg-card/60 backdrop-blur-3xl rounded-t-xl">
+                {/* Drag handle row */}
+                <div
+                  onPointerDown={(e) => dragControls.start(e.nativeEvent)}
+                  className="
+                    bg-transparent
+                    flex items-center justify-center
+                    py-2
+                    cursor-grab active:cursor-grabbing
+                    select-none
+                  "
+                >
+                  <span className="h-0.5 w-12 rounded-full bg-primary/90" aria-hidden="true" />
+                </div>
 
-          {/* Info row */}
-          <div
-            onPointerDown={(e) => dragControls.start(e.nativeEvent)}
-            className="flex items-center justify-between px-3 pb-2 select-none"
-          >
-            <div className="flex items-center gap-1 text-xs text-muted-foreground">
-              <FiGithub size={12} className="text-muted-foreground" />
-              <span>{username}</span>
-            </div>
+                {/* Info row */}
+                <div
+                  onPointerDown={(e) => dragControls.start(e.nativeEvent)}
+                  className="flex items-center justify-between px-3 pb-2 select-none"
+                >
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <FiGithub size={12} className="text-muted-foreground" />
+                    <span>{username}</span>
+                  </div>
 
-            <div className="text-xs text-muted-foreground">
-              {calendar
-                ? `${calendar.totalContributions.toLocaleString()} contributions this year`
-                : "Loading..."}
-            </div>
-          </div>
-        </div>
-
-        <CardContent className="p-2">
-          {!calendar ? (
-            <div className="mb-2 grid grid-flow-col auto-cols-3 gap-0.75 pl-7 w-150 h-28 rounded-md bg-muted/30" />
-          ) : (
-            <>
-              {/* Month labels */}
-              <div className="mb-2 grid grid-flow-col auto-cols-3 gap-0.75 pl-7">
-                {calendar.weeks.map((_, weekIndex) => {
-                  const label = monthLabels.find((m) => m.weekIndex === weekIndex)?.name;
-                  return (
-                    <div key={weekIndex} className="h-3 text-xs text-muted-foreground/80">
-                      {label ?? ""}
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="flex">
-                {/* Heatmap grid: weeks as columns, 7 rows */}
-                <div className="grid grid-flow-col auto-cols-3 gap-0.75">
-                  {calendar.weeks.map((week, weekIdx) => (
-                    <div key={week.firstDay + weekIdx} className="grid grid-rows-7 gap-0.75">
-                      {week.contributionDays.map((day) => {
-                        const level = levelForCount(day.contributionCount);
-                        return (
-                          <div
-                            key={day.date + day.weekday}
-                            title={`${day.date}: ${day.contributionCount} contributions`}
-                            className={`h-2 w-2 rounded-[3px] ${cellClass(level)}`}
-                          />
-                        );
-                      })}
-                    </div>
-                  ))}
+                  <div className="text-xs text-muted-foreground">
+                    {`${calendar.totalContributions.toLocaleString()} contributions this year`}
+                  </div>
                 </div>
               </div>
-            </>
-          )}
-        </CardContent>
-      </Card>
+
+              <CardContent className="p-[0.6rem] pt-0">
+                {/* Month labels */}
+                <div className="mb-2 grid grid-flow-col auto-cols-3 gap-0.75 pl-7">
+                  {calendar.weeks.map((_, weekIndex) => {
+                    const label = monthLabels.find((m) => m.weekIndex === weekIndex)?.name;
+                    return (
+                      <div key={weekIndex} className="h-3 text-xs text-muted-foreground/80 cursor-default">
+                        {label ?? ""}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="flex">
+                  {/* Heatmap grid: weeks as columns, 7 rows */}
+                  <div className="grid grid-flow-col auto-cols-3 gap-0.75">
+                    {calendar.weeks.map((week, weekIdx) => (
+                      <div key={week.firstDay + weekIdx} className="grid grid-rows-7 gap-0.75">
+                        {week.contributionDays.map((day) => {
+                          const level = levelForCount(day.contributionCount);
+                          return (
+                            <div
+                              key={day.date + day.weekday}
+                              title={`${day.date}: ${day.contributionCount} contributions`}
+                              className={`h-2 w-2 rounded-[3px] ${cellClass(level)} transition-colors duration-500`}
+                            />
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

@@ -37,7 +37,7 @@ export default function Desktop() {
   return (
     <div className="w-full h-full">
       <MenuBar activeAppName={activeId ? REGISTRY[activeId].title : "Desktop"} />
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={true}>
         {stack.map((id, idx) => {
           const { title, Component } = REGISTRY[id];
           return (
