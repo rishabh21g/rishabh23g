@@ -178,66 +178,91 @@ export default function Game() {
     }, [running, gameOver, food]);
 
     return (
-        <div className="space-y-1 p-2   w-150 max-w-[92vw]
-        max-h-[80vh] overflow-hidden ">
-            <div className="flex items-center justify-between gap-3 w-full">
-                <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                    Snake
+        <div className="flex flex-col items-center justify-center p-2  h-full max-h-[80vh] w-190 max-w-[92vw]">
+            <div className="w-full max-w-sm space-y-4">
+                {/* Header Stats */}
+                <div className="flex items-center justify-between px-1">
+                    <div className="text-[0.65rem] font-medium uppercase tracking-[0.25em] text-muted-foreground/70">
+                        Snake
+                    </div>
+
+                    <div className="flex items-center gap-4 text-[0.65rem] font-medium tracking-wide text-muted-foreground/70">
+                        <span>
+                            Score: <span className="text-primary">{score}</span>
+                        </span>
+                        <span>
+                            Best: <span className="text-foreground/80">{best}</span>
+                        </span>
+                        <span className={gameOver ? "text-destructive font-bold" : running ? "text-primary/80" : ""}>
+                            {gameOver ? "Game Over" : running ? "Running" : "Paused"}
+                        </span>
+                    </div>
                 </div>
 
-                <div className="flex items-center gap-3 text-[0.7rem] text-muted-foreground">
-                    <span>
-                        Score: <span className="text-foreground/80">{score}</span>
-                    </span>
-                    <span>
-                        Best: <span className="text-foreground/80">{best}</span>
-                    </span>
-                    <span className={gameOver ? "text-destructive" : ""}>
-                        {gameOver ? "Game Over" : running ? "Running" : "Paused"}
-                    </span>
-                </div>
-            </div>
-
-                <div
-                    className="mx-auto grid gap-1 w-full max-w-220 grid-cols-[repeat(var(--grid),minmax(0,1fr))] "
-                    style={{ ["--grid" as any]: GRID }}
-                >
-                    {cells.map((c) => (
-                        <div
-                            key={c.key}
-                            className={[
-                                "aspect-square rounded-lg  ring-border/25",
-                                c.isFood ? "bg-primary/90" : "",
-                                c.isHead ? "bg-foreground/70" : c.isSnake ? "bg-foreground/35" : "bg-background/40",
-                            ].join(" ")}
-                        />
-                    ))}
+                {/* Game Board */}
+                <div className="rounded-xl border border-border/40 bg-card/40 p-2 shadow-sm backdrop-blur-md w-140 max-w-[92vw] flex items-center justify-center mx-auto">
+                    <div
+                        className="mx-auto grid gap-1 w-full "
+                        style={{
+                            gridTemplateColumns: `repeat(${GRID}, minmax(0, 1fr))`,
+                        }}
+                    >
+                        {cells.map((c) => (
+                            <div
+                                key={c.key}
+                                className={[
+                                    "aspect-square rounded-sm transition-colors duration-75",
+                                    c.isFood 
+                                        ? "bg-primary shadow-[0_0_8px_var(--primary)]" 
+                                        : c.isHead 
+                                            ? "bg-foreground" 
+                                            : c.isSnake 
+                                                ? "bg-foreground/50" 
+                                                : "bg-muted/30 border border-border/10",
+                                ].join(" ")}
+                            />
+                        ))}
+                    </div>
                 </div>
 
-            <div className="flex items-center justify-center w-full gap-2 my-1">
-             
-
-                <div className="flex items-center gap-">
+                {/* Controls */}
+                <div className="flex items-center justify-center gap-3 pt-2">
                     <Button
+                        variant="outline"
+                        size="icon"
                         onClick={() => setRunning((r) => !r)}
+                        aria-label={running ? "Pause" : "Play"}
+                        className="h-8 w-8 rounded-full border-border/40 bg-background/50 backdrop-blur-md hover:bg-muted"
                     >
-                        {running ? <LuPause className="h-4 w-4 text-foreground/80" aria-hidden="true" /> : <LuPlay className="h-4 w-4 text-foreground/80" aria-hidden="true"  />}
+                        {running ? <LuPause className="h-4 w-4" /> : <LuPlay className="h-4 w-4 ml-0.5" />}
                     </Button>
 
                     <Button
+                        variant="outline"
+                        size="icon"
                         onClick={reset}
+                        aria-label="Restart"
+                        className="h-8 w-8 rounded-full border-border/40 bg-background/50 backdrop-blur-md hover:bg-muted"
                     >
-                        <BiReset className="h-4 w-4 text-foreground/80" aria-hidden="true"  />
+                        <BiReset className="h-4 w-4" />
                     </Button>
 
                     <Button
+                        variant="ghost"
+                        size="sm"
                         onClick={() => {
                             localStorage.removeItem(BEST_KEY);
                             setBest(0);
                         }}
+                        className="h-8 px-3 rounded-full text-[0.65rem] text-muted-foreground/60 hover:text-destructive hover:bg-destructive/10"
                     >
-                        <MdClear className="h-4 w-4 text-foreground/80" aria-hidden="true" />
+                        Clear Best
                     </Button>
+                </div>
+
+                {/* Instructions */}
+                <div className="text-center text-[0.6rem] text-muted-foreground/50 pt-2">
+                    Use WASD or Arrow keys to move
                 </div>
             </div>
         </div>
