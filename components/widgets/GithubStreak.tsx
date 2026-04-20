@@ -97,10 +97,7 @@ export default function GithubStreak() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-      {/* 
-        AnimatePresence handles the mounting animation. 
-        It will only render and animate the card once `calendar` is not null.
-      */}
+  
       <AnimatePresence initial={true}>
         {calendar && (
           <motion.div
