@@ -243,18 +243,19 @@
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: oklch(from var(--primary) l c h / 0.30);
+    background-color: var(--primary-scrollbar, rgba(150, 150, 150, 0.3));
     border-radius: 9999px;
     border: 2px solid transparent;
     background-clip: content-box;
   }
 
   *::-webkit-scrollbar-thumb:hover {
-    background-color: oklch(from var(--primary) l c h / 0.42);
+    /* Change this line so it doesn't use the relative oklch syntax */
+    background-color: var(--primary-scrollbar, rgba(150, 150, 150, 0.5));
   }
 
   *::-webkit-scrollbar-thumb:active {
-    background-color: oklch(from var(--primary) l c h / 0.55);
+    background-color: var(--primary-scrollbar, rgba(150, 150, 150, 0.6));
   }
 
   * {

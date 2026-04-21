@@ -81,11 +81,11 @@ export default function Mobile() {
   const viewport = { once: true, amount: 0.25 } as const;
 
   return (
-    <div className="block sm:hidden">
+    <div className="block sm:hidden no-scrollbar">
       {/* fixed header */}
       <MenuBar />
 
-      <div className="pt-12 px-3 pb-6 mx-auto w-full max-w-130 space-y-4">
+      <div className="pt-12 px-3 pb-6 mx-auto w-full max-w-130 space-y-4 no-scrollbar">
         {/* Basics */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
           <Card className="bg-background/10 backdrop-blur-xl ring-0">
@@ -308,6 +308,10 @@ export default function Mobile() {
               </div>
             </CardContent>
           </Card>
+        {/* Footer */}
+        <footer className="py-6 text-center text-xs text-muted-foreground/60">
+          © {new Date().getFullYear()} Rishabh Gupta. All rights reserved.
+        </footer>
         </motion.div>
       </div>
     </div>
