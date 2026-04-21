@@ -3,6 +3,7 @@ import { Clock } from './Clock';
 import Battery from './Battery'
 import Connection from './Connection';
 import { ThemeMode } from './ThemeMode';
+import { VisitorCount } from './VisitorCount';
 
 type MenuBarProps = {
   activeAppName?: string;
@@ -25,6 +26,7 @@ const MenuBar = ({ activeAppName = "Desktop" }: MenuBarProps) => {
       </div>
 
       <div className="flex items-center gap-4 text-sm text-foreground/80">
+      <VisitorCount/>
         <Connection/>
         <Battery/>
         <ThemeMode/>

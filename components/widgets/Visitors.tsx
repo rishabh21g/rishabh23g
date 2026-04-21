@@ -3,28 +3,18 @@
 import React, { useEffect, useState } from "react";
 import { motion, useDragControls } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
+import { useVisitor } from "@/hooks/useVisitor";
 
-type VisitorCounts = { totalVisits: number; uniqueVisitors: number };
 
 export default function Visitors() {
   const dragControls = useDragControls();
-  const [counts, setCounts] = useState<VisitorCounts | null>(null);
+  const {counts, fetchVisits} = useVisitor()
 
-  const fetchVisits = async () => {
-    await fetch("/api/visitors", { method: "POST" });
-    const res = await fetch("/api/visitors", { cache: "no-store" });
-    const data = await res.json()
-    if (!res.ok)  { 
-      console.log("Failed to load visitors")
-    }else{
-      setCounts(data)
-      
-     }
-  };
+
 
 
   useEffect(() => {
-    fetchVisits().catch(console.error);
+    fetchVisits(true)
   }, []);
 
   return (
@@ -56,7 +46,7 @@ export default function Visitors() {
             </div>
 
             <div className="mt-1 text-4xl font-semibold text-foreground tabular-nums">
-              {counts ? counts.totalVisits.toLocaleString() : "_"}
+              {counts ? counts.totalVisits : "_"}
             </div>
 
             <div className="mt-1 text-sm text-muted-foreground/60">

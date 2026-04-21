@@ -306,13 +306,13 @@ export const RESUME: ResumeData = {
     {
       degree: "Bachelor in Data Science with AI and ML",
       school: "Indian Institute of Technology Madras, Chennai",
-      start: "2022",
+      start: "2025",
       end: "Present",
     },
     {
       degree: "Bachelor of Technology in Computer Science (B.Tech)",
       school: "Dr. A.P.J. Abdul Kalam Technical University, Greater Noida",
-      start: "2025",
+      start: "2022",
       end: "Present",
     },
   ],
