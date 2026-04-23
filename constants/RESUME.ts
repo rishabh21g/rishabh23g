@@ -36,7 +36,6 @@ export type ResumeBasics = {
   headline: string; // short role line
   location: string;
   email: string;
-  phone: string;
   handle: string;
   age: number;
   avatarSrc?: string,
@@ -102,7 +101,6 @@ export const RESUME: ResumeData = {
     headline: "Software Engineer / Fullstack Developer Golang + React Native",
     location: "Saket, New Delhi",
     email: "rishabhiitm@zohomail.in",
-    phone: "+91 8840952165",
     handle: "rishabh21g",
     age: 23,
     avatarSrc: "/dp.jpeg",
