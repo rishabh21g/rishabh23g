@@ -67,14 +67,14 @@ export default function Mobile() {
   const reveal = {
     hidden: {
       opacity: 0,
-      y: reduceMotion ? 0 : 24,
-      filter: reduceMotion ? "blur(0px)" : "blur(14px)",
+      y: reduceMotion ? 0 : 30,
+      filter: reduceMotion ? "blur(0px)" : "blur(20px)",
     },
     show: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.25, ease: [0.12, 1, 0.9, 1] },
     },
   } as const;
 
@@ -83,7 +83,7 @@ export default function Mobile() {
   return (
     <div className="block sm:hidden no-scrollbar">
       {/* fixed header */}
-      <MenuBar />
+        <MenuBar />
 
       <div className="pt-12 px-3 pb-6 mx-auto w-full max-w-130 space-y-4 no-scrollbar">
         {/* Basics */}
@@ -134,9 +134,9 @@ export default function Mobile() {
               </div>
             </CardContent>
           </Card>
+          <hr className="border-border/90" />
         </motion.div>
 
-        <hr className="border-border/90" />
 
         {/* Experience */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
@@ -171,9 +171,9 @@ export default function Mobile() {
               ))}
             </CardContent>
           </Card>
+          <hr className="border-border/90" />
         </motion.div>
 
-        <hr className="border-border/90" />
 
         {/* Skills */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
@@ -204,9 +204,9 @@ export default function Mobile() {
               </div>
             </CardContent>
           </Card>
+          <hr className="border-border/90" />
         </motion.div>
 
-        <hr className="border-border/90" />
 
         {/* Projects */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
@@ -251,9 +251,9 @@ export default function Mobile() {
               ))}
             </CardContent>
           </Card>
+          <hr className="border-border/90" />
         </motion.div>
 
-        <hr className="border-border/90" />
 
         {/* Education + Achievements */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
@@ -308,10 +308,10 @@ export default function Mobile() {
               </div>
             </CardContent>
           </Card>
-        {/* Footer */}
-        <footer className="py-6 text-center text-xs text-muted-foreground/60">
-          © {new Date().getFullYear()} Rishabh Gupta. All rights reserved.
-        </footer>
+          {/* Footer */}
+          <footer className="py-6 text-center text-xs text-muted-foreground/60">
+            © {new Date().getFullYear()} Rishabh Gupta. All rights reserved.
+          </footer>
         </motion.div>
       </div>
     </div>

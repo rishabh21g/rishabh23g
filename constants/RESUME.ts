@@ -54,7 +54,7 @@ export type ResumeExperience = {
 export type ResumeProject = {
   name: string;
   subtitle?: string;
-  progress : string;
+  progress: string;
   links: ResumeLink[];
   highlights: string[];
   stack?: string[];
@@ -174,7 +174,7 @@ export const RESUME: ResumeData = {
     {
       name: "GoDraw",
       subtitle: "Free Infinite Whiteboard (PWA)",
-      progress:"In progress",
+      progress: "In progress",
       links: [
         {
           key: "live",
@@ -184,16 +184,18 @@ export const RESUME: ResumeData = {
         },
       ],
       highlights: [
-        "Developed a real-time collaborative whiteboard app powered by Rough.js and the Canvas API.",
-        "Implemented real-time synchronization using Yjs CRDTs and a Go backend with Gorilla WebSocket.",
-        "Built with React, Docker, Nginx, and PostgreSQL for high performance and reliability.",
+        "Built an Excalidraw-like real-time collaborative whiteboard from scratch using Canvas API and Rough.js, supporting smooth freehand drawing and object manipulation",
+        "Engineered a custom rendering pipeline with requestAnimationFrame, viewport culling, and a multi-layered canvas",
+        " Implemented real-time synchronization using Yjs CRDTs and Gorilla WebSocket, ensuring conflict-free updates across multiple clients",
+        "Designed a scalable backend using Go, Dockerized microservices, and Nginx reverse proxy for efficient request routing and deployment",
+        "Currently implementing Redis Pub/Sub for cross-region synchronization to support low-latency real-time collaboration at scale"
       ],
-      stack: ["React", "Go", "WebSocket", "Yjs", "PostgreSQL", "Docker", "Nginx"],
+      stack: ["React","Vanilla Javascript" , "CanvasAPI" , "Zustand" , "Go", "WebSocket", "Yjs", "CRDT", "PostgreSQL", "Docker", "Nginx" , "Redis(Pub/Sub)" , "RESTPI"],
     },
     {
       name: " Web Crawler",
       subtitle: "A Go-based web crawler using a producer-consumer pattern (In Progress...)",
-      progress:"In progress",
+      progress: "In progress",
 
       links: [
         {
@@ -204,7 +206,7 @@ export const RESUME: ResumeData = {
         },
       ],
       highlights: [
-        "Built a concurrent web crawler in Go using producer–consumer pattern (10 goroutines/workers) with channels + sync.WaitGroup to crawl pages in parallel.",
+        "Built a concurrent web crawler in Go using producer consumer pattern (10 goroutines/workers) with channels + sync.WaitGroup to crawl pages in parallel.",
         "Implemented a thread-safe scheduler (mutex-protected Seen map) to enforce domain allowlisting + depth limit (MaxDepth=2) and prevent duplicate URL processing.",
         "Developed an HTTP fetcher with context cancellation and strict validation: 10s timeout, Content-Type must include text/html, max response size 5MB to avoid memory blowups.",
         "Implemented HTML link extraction using golang.org/x/net/html, resolving relative URLs to absolute and filtering junk schemes (#, mailto:, javascript:, tel:).",
@@ -213,29 +215,31 @@ export const RESUME: ResumeData = {
       stack: ["Go", "Goroutines", "Channels"],
     },
     {
-      name: "MailGo",
-      subtitle: "Concurrent Email Sender",
-      progress:"In progress",
-
+      name: "Cinema Booking System",
+      subtitle:
+        "A full-stack seat booking app with a Go REST API + Redis-backed holds and a React (Vite) UI",
+      progress: "In progress",
       links: [
         {
           key: "repo",
           label: "GitHub",
-          href: "https://github.com/rishabh21g/mailchimp",
+          href: "https://github.com/rishabh21g/booking_cinema.git",
           icon: FaGithub,
         },
       ],
       highlights: [
-        "Built a web dashboard with auth (Gin + JWT), templates, CSV upload, and bulk email sending.",
-        "Engineered a concurrent email delivery system with goroutines, channels, and rate-limited workers (producer-consumer).",
-        "Integrated PostgreSQL for user management, dynamic HTML templates, and Mailpit for SMTP testing.",
+        "Built a Go backend with `net/http` + `ServeMux` exposing REST endpoints for listing movies, viewing seat status, holding seats, confirming sessions, and releasing holds.",
+        "Implemented concurrency-safe seat holding using Redis atomic set-if-not-exists (NX) with a hold TTL (2 minutes), guaranteeing only one user can hold a seat under high contention.",
+        "Added a reverse session lookup in Redis (`session:{id}` → seat key) to support confirm/release flows and avoid scanning keys for session operations.",
+        "Developed a React UI (Vite) with componentized layout (Movies, SeatGrid, Checkout, Timer) and polling (every 2s) to keep seat availability synced across multiple clients.",
+        "Wrote a high-contention concurrency test (`go test -race`) that launches 100k goroutines attempting the same seat and asserts exactly 1 success and the rest failures.",
       ],
-      stack: ["Go", "Gin", "JWT", "PostgreSQL", "Mailpit"],
+      stack: ["Go", "Redis", "React", "Vite", "TypeScript", "Docker"],
     },
     {
       name: "AI Interview Mobile Application",
       subtitle: "AI-Powered Technical Interview Platform",
-      progress:"Closed",
+      progress: "Closed",
 
       links: [
         {
@@ -256,7 +260,7 @@ export const RESUME: ResumeData = {
     {
       name: "AI Trip Planner",
       subtitle: "Effortless, AI-powered trip recommendations",
-      progress:"Closed",
+      progress: "Closed",
 
       links: [
         {
@@ -281,7 +285,7 @@ export const RESUME: ResumeData = {
     {
       name: "Doctor Portfolio",
       subtitle: "Personal Website for a Doctor with appointment scheduling",
-      progress:"Closed",
+      progress: "Closed",
 
       links: [
         {
