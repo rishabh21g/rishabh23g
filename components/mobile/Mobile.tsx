@@ -81,11 +81,11 @@ export default function Mobile() {
   const viewport = { once: true, amount: 0.25 } as const;
 
   return (
-    <div className="block sm:hidden no-scrollbar">
+    <div className="block sm:hidden  ">
       {/* fixed header */}
         <MenuBar />
 
-      <div className="pt-12 px-3 pb-6 mx-auto w-full max-w-130 space-y-4 no-scrollbar">
+      <div className="pt-12 px-3 pb-6 mx-auto w-full max-w-130 space-y-2">
         {/* Basics */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={viewport} style={{ willChange: "transform, filter, opacity" }}>
           <Card className="bg-background/10 backdrop-blur-xl ring-0">
