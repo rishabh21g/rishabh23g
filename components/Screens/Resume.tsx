@@ -98,9 +98,18 @@ function ProjectBlock({ project }: { project: ResumeProject }) {
 
           {project.stack?.length ? (
             <div className="mt-2 flex flex-wrap gap-2">
-              {project.stack.map((s) => (
-                <Chip key={s}>{s}</Chip>
-              ))}
+              {project.stack.map((s) =>
+                typeof s === "string" ? (
+                  <Chip key={s}>{s}</Chip>
+                ) : (
+                  <Chip key={s.name}>
+                    <span className="flex items-center gap-1.5">
+                      <s.icon className="h-3 w-3" />
+                      {s.name}
+                    </span>
+                  </Chip>
+                )
+              )}
             </div>
           ) : null}
         </div>
@@ -229,9 +238,18 @@ export default function Resume() {
             >
               <div className="text-xs text-muted-foreground/60">{row.label}</div>
               <div className="flex flex-wrap gap-2">
-                {row.items.map((s) => (
-                  <Chip key={s}>{s}</Chip>
-                ))}
+                {row.items.map((s) =>
+                  typeof s === "string" ? (
+                    <Chip key={s}>{s}</Chip>
+                  ) : (
+                    <Chip key={s.name}>
+                      <span className="flex items-center gap-1.5">
+                        <s.icon className="h-3 w-3" />
+                        {s.name}
+                      </span>
+                    </Chip>
+                  )
+                )}
               </div>
             </div>
           ))}

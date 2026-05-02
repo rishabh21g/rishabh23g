@@ -1,8 +1,24 @@
 import type { IconType } from "react-icons";
+import { BiWindows } from "react-icons/bi";
+import { BsTypescript } from "react-icons/bs";
 
-import { FaGithub, FaLinkedin, FaInstagram, FaSpotify } from "react-icons/fa";
+import {
+  FaGithub, FaLinkedin, FaInstagram, FaSpotify, FaJs, FaPython, FaHtml5, FaCss3Alt, FaNodeJs, FaDocker, FaGitAlt, FaNpm
+} from "react-icons/fa";
 import { FaEarthAsia, FaXTwitter } from "react-icons/fa6";
 import { FiMail, FiGlobe } from "react-icons/fi";
+import {
+  SiExpress, SiGoland, SiLinux, SiNextdotjs, SiRedux, SiShadcnui, SiSupabase, SiTailwindcss, SiVercel
+} from "react-icons/si";
+import { VscCode } from "react-icons/vsc";
+import {
+  FaReact, FaDatabase, FaVideo, FaMapMarkedAlt
+} from "react-icons/fa";
+import { FaGolang } from "react-icons/fa6";
+import { SiNginx, SiPostgresql, SiRedis, SiTypescript, SiVite, SiFirebase, SiSocketdotio, SiExpo } from "react-icons/si";
+import { TbApi } from "react-icons/tb";
+import { BiNetworkChart } from "react-icons/bi";
+import { BsLightningCharge } from "react-icons/bs";
 
 export type ResumeLinkKey =
   | "portfolio"
@@ -15,6 +31,10 @@ export type ResumeLinkKey =
   | "live"
   | "repo";
 
+export type SkillWithIcon = {
+  name: string;
+  icon: IconType;
+};
 export type ResumeLink = {
   key: ResumeLinkKey;
   label: string;
@@ -57,7 +77,7 @@ export type ResumeProject = {
   progress: string;
   links: ResumeLink[];
   highlights: string[];
-  stack?: string[];
+  stack?: SkillWithIcon[];
 };
 
 export type ResumeEducation = {
@@ -76,10 +96,10 @@ export type ResumeAchievement = {
 };
 
 export type ResumeSkills = {
-  languages: string[];
-  librariesFrameworks: string[];
-  database: string[];
-  toolsOS: string[];
+  languages: SkillWithIcon[];
+  librariesFrameworks: SkillWithIcon[];
+  database: SkillWithIcon[];
+  toolsOS: SkillWithIcon[];
   theoretical: string[];
 };
 
@@ -145,26 +165,46 @@ export const RESUME: ResumeData = {
   ],
 
   skills: {
-    languages: ["JavaScript", "TypeScript", "Golang", "SQL", "Python", "HTML"],
+    languages: [
+      { name: "JavaScript", icon: FaJs },
+      { name: "TypeScript", icon: BsTypescript },
+      { name: "Golang", icon: FaGolang },
+      { name: "SQL", icon: FaDatabase },
+      { name: "Python", icon: FaPython },
+      { name: "HTML", icon: FaHtml5 },
+      { name: "CSS", icon: FaCss3Alt },],
     librariesFrameworks: [
-      "React.js",
-      "Next.js",
-      "React Native",
-      "Expo",
-      "Node.js",
-      "Express.js",
-      "Go-Gin",
-      "Shadcn",
-      "Tailwind CSS",
-      "Zustand",
+      { name: "React.js", icon: FaReact },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "React Native", icon: FaReact },
+      { name: "Expo", icon: SiExpo },
+      { name: "Node.js", icon: FaNodeJs },
+      { name: "Express.js", icon: SiExpress },
+      { name: "Go-Gin", icon: SiGoland },
+      { name: "Shadcn", icon: SiShadcnui },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "Zustand", icon: SiRedux },
     ],
-    database: ["Redis", "PostgresSQL", "Supabase", "Firebase"],
-    toolsOS: ["Windows", "Linux (Ubuntu)", "Github", "Docker", "Git", "NPM", "VSCode", "Vercel"],
-    theoretical: [
-      "Operating System",
+    database: [
+      { name: "Redis", icon: SiRedis },
+      { name: "PostgresSQL", icon: SiPostgresql },
+      { name: "Supabase", icon: SiSupabase },
+      { name: "Firebase", icon: SiFirebase },
+    ],
+    toolsOS: [
+      { name: "Windows", icon: BiWindows },
+      { name: "Linux (Ubuntu)", icon: SiLinux },
+      { name: "Github", icon: FaGithub },
+      { name: "Docker", icon: FaDocker },
+      { name: "Git", icon: FaGitAlt },
+      { name: "NPM", icon: FaNpm },
+      { name: "VSCode", icon: VscCode },
+      { name: "Vercel", icon: SiVercel },
+    ],
+    theoretical: ["Operating System",
       "Computer Networks",
-      "OOPs with Java",
-      "DBMS",
+      "Object Oriented Programming",
+      "Database Management System",
       "Computational Thinking",
       "Theory of Computation",
     ],
@@ -190,7 +230,17 @@ export const RESUME: ResumeData = {
         "Designed a scalable backend using Go, Dockerized microservices, and Nginx reverse proxy for efficient request routing and deployment",
         "Currently implementing Redis Pub/Sub for cross-region synchronization to support low-latency real-time collaboration at scale"
       ],
-      stack: ["React","Vanilla Javascript" , "CanvasAPI" , "Zustand" , "Go", "WebSocket", "Yjs", "CRDT", "PostgreSQL", "Docker", "Nginx" , "Redis(Pub/Sub)" , "RESTPI"],
+      stack: [
+        { name: "React", icon: FaReact },
+        { name: "Zustand", icon: SiRedux }, // Fallback for state manager
+        { name: "Go", icon: FaGolang },
+        { name: "WebSocket", icon: SiSocketdotio },
+        { name: "PostgreSQL", icon: SiPostgresql },
+        { name: "Docker", icon: FaDocker },
+        { name: "Nginx", icon: SiNginx },
+        { name: "Redis (Pub/Sub)", icon: SiRedis },
+        { name: "REST API", icon: TbApi }
+      ],
     },
     {
       name: " Web Crawler",
@@ -212,7 +262,11 @@ export const RESUME: ResumeData = {
         "Implemented HTML link extraction using golang.org/x/net/html, resolving relative URLs to absolute and filtering junk schemes (#, mailto:, javascript:, tel:).",
         "Added backpressure handling via a buffered task channel (size 100) and non-blocking enqueue (drops when full) to keep workers responsive under high fan-out.",
       ],
-      stack: ["Go", "Goroutines", "Channels"],
+      stack: [
+        { name: "Go", icon: FaGolang },
+        { name: "Goroutines", icon: BsLightningCharge },
+        { name: "Channels", icon: BiNetworkChart }
+      ],
     },
     {
       name: "Cinema Booking System",
@@ -234,7 +288,14 @@ export const RESUME: ResumeData = {
         "Developed a React UI (Vite) with componentized layout (Movies, SeatGrid, Checkout, Timer) and polling (every 2s) to keep seat availability synced across multiple clients.",
         "Wrote a high-contention concurrency test (`go test -race`) that launches 100k goroutines attempting the same seat and asserts exactly 1 success and the rest failures.",
       ],
-      stack: ["Go", "Redis", "React", "Vite", "TypeScript", "Docker"],
+      stack: [
+        { name: "Go", icon: FaGolang },
+        { name: "Redis", icon: SiRedis },
+        { name: "React", icon: FaReact },
+        { name: "Vite", icon: SiVite },
+        { name: "TypeScript", icon: SiTypescript },
+        { name: "Docker", icon: FaDocker }
+      ],
     },
     {
       name: "AI Interview Mobile Application",
@@ -255,7 +316,13 @@ export const RESUME: ResumeData = {
         "Engineered a system to securely record, process, and upload entire interview sessions for post-interview review by hiring managers.",
         "Built a robust and secure authentication flow and managed complex application state using Zustand for a seamless user experience.",
       ],
-      stack: ["React Native", "Expo", "Zustand", "AI/ML APIs", "Speech-to-Text", "Video/Audio Processing", "Secure Authentication"],
+      stack: [
+        { name: "React Native", icon: FaReact },
+        { name: "Expo", icon: SiExpo },
+        { name: "Zustand", icon: SiRedux },
+        { name: "Speech-to-Text", icon: FaVideo },
+        { name: "Secure Auth", icon: TbApi }
+      ],
     },
     {
       name: "AI Trip Planner",
@@ -278,7 +345,13 @@ export const RESUME: ResumeData = {
         "Engineered a secure authentication system with Firebase Auth for user login and registration.",
         "Created an interactive map view to help users visually explore and organize their travel destinations.",
       ],
-      stack: ["React", "Tailwind CSS", "Shadcn UI", "Firebase", "Gemini AI", "Google Places API"],
+      stack: [
+        { name: "React", icon: FaReact },
+        { name: "Tailwind CSS", icon: SiTailwindcss },
+        { name: "Firebase", icon: SiFirebase },
+        { name: "Gemini AI", icon: BsLightningCharge },
+        { name: "Google Places API", icon: FaMapMarkedAlt }
+      ],
     },
   ],
   client_projects: [
@@ -300,7 +373,13 @@ export const RESUME: ResumeData = {
         "Implemented a clean and responsive design using React.js and Tailwind CSS, ensuring optimal user experience across devices.",
         "Integrated contact forms and appointment scheduling features to enhance patient engagement.",
       ],
-      stack: ["React", "Tailwind CSS", "Vercel", "Resend", "RestAPI", "Google Map API"],
+      stack: [
+        { name: "React", icon: FaReact },
+        { name: "Tailwind CSS", icon: SiTailwindcss },
+        { name: "Vercel", icon: SiVercel },
+        { name: "REST API", icon: TbApi },
+        { name: "Google Map API", icon: FaMapMarkedAlt }
+      ],
     },
   ],
 

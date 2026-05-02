@@ -1,0 +1,6 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Specify the path to your sitemap
+Sitemap: https://rishabhiitm.me/sitemap.xml

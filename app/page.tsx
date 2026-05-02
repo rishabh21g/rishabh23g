@@ -61,7 +61,7 @@ export default function Home() {
 
  
   return (
-    <main className="desktop-bg min-h-screen w-screen overflow-x-hidden sm:overflow-hidden">
+    <main className="desktop-bg min-h-screen w-screen sm:overflow-hidden">
       {/* Desktop layout */}
       <div className="hidden sm:block">
         <MenuBar />

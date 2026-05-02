@@ -1,13 +1,10 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { ContributionCalendar } from "@/types/github";
 import { FiGithub } from "react-icons/fi";
 import { AnimatePresence, motion, useDragControls } from "framer-motion";
-
-const CACHE_KEY = "github_streak_cache";
-const CACHE_TTL = 1000 * 60 * 60 * 24; // 24 hours in milliseconds
+import { useGithub } from "@/hooks/useGithub";
 
 function levelForCount(count: number): 0 | 1 | 2 | 3 | 4 {
   if (count <= 0) return 0;
@@ -34,49 +31,10 @@ function cellClass(level: 0 | 1 | 2 | 3 | 4) {
 
 export default function GithubStreak() {
   const username = "rishabh21g";
-
   const dragControls = useDragControls();
-  const [calendar, setCalendar] = useState<ContributionCalendar | null>(null);
-
-  const fetchContribution = async () => {
-    // 1. Check if we have valid cached data
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      try {
-        const { data, timestamp } = JSON.parse(cached);
-        // If cache is newer than 24 hours, use it and stop executing
-        if (Date.now() - timestamp < CACHE_TTL) {
-          setCalendar(data);
-          return;
-        }
-      } catch (err) {
-        console.error("Failed to parse cache", err);
-      }
-    }
-
-    // 2. If no cache or it expired, fetch fresh data
-    // Removed cache: "no-store" so the browser is also allowed to cache the network request
-    const response = await fetch(`/api/github?user=${username}`);
-
-    if (!response.ok) {
-      throw new Error("Failed to load Github streak!");
-    }
-
-    const data = (await response.json()) as ContributionCalendar;
-    setCalendar(data);
-
-    // 3. Save the fresh data to local storage for next time
-    localStorage.setItem(
-      CACHE_KEY,
-      JSON.stringify({ data, timestamp: Date.now() })
-    );
-  };
-
-  useEffect(() => {
-    fetchContribution().catch(console.error);
-    // username is a constant, so no deps needed
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  
+  // Use extracted hook
+  const { calendar } = useGithub(username);
 
   const monthLabels = useMemo(() => {
     if (!calendar) return [];
@@ -97,7 +55,6 @@ export default function GithubStreak() {
       dragMomentum={false}
       style={{ touchAction: "none" }}
     >
-  
       <AnimatePresence initial={true}>
         {calendar && (
           <motion.div
@@ -129,14 +86,14 @@ export default function GithubStreak() {
                 {/* Info row */}
                 <div
                   onPointerDown={(e) => dragControls.start(e.nativeEvent)}
-                  className="flex items-center justify-between px-3 pb-2 select-none"
+                  className="flex items-center justify-between px-3 pb-2 select-none gap-8"
                 >
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground whitespace-nowrap">
                     <FiGithub size={12} className="text-muted-foreground" />
                     <span>{username}</span>
                   </div>
 
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-xs text-muted-foreground whitespace-nowrap">
                     {`${calendar.totalContributions.toLocaleString()} contributions this year`}
                   </div>
                 </div>

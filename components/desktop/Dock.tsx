@@ -3,15 +3,12 @@
 import React from "react";
 import { APPS, type DockApp, type DockAppId } from "@/types/dock";
 import DockIcon from "@/components/ui/icon";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-
+import { motion, useMotionValue } from "framer-motion";
 
 type DockProps = {
   activeIds: Set<DockAppId>;
   onToggle: (id: DockAppId) => void;
   apps?: DockApp[];
-  radius?: number;
-  maxScale?: number;
   className?: string;
 };
 
@@ -19,39 +16,22 @@ export default function Dock({
   activeIds,
   onToggle,
   apps = APPS,
-  radius = 140,
-  maxScale = 1.38,
   className,
 }: DockProps) {
-  const mouseX = useMotionValue<number | null>(null);
-
-  const dockScaleTarget = useMotionValue(1);
-  const dockScale = useSpring(dockScaleTarget, {
-    stiffness: 500,
-    damping: 58,
-    mass: 0.9,
-  });
+  const mouseX = useMotionValue(Infinity);
 
   return (
-    <div className="fixed bottom-6 left-0 right-0 z-80 flex justify-center mx-2">
+    <nav className="fixed bottom-6 left-0 right-0 z-80 flex justify-center mx-2 pointer-events-none">
       <motion.div
-        style={{ scale: dockScale }}
-        onPointerMove={(e) => {
-          mouseX.set(e.clientX);
-          dockScaleTarget.set(1.1);
-        }}
-        onPointerLeave={() => {
-          mouseX.set(null);
-          dockScaleTarget.set(1);
-        }}
         className={[
-          "relative flex items-end gap-1  rounded-2xl px-4 py-2",
-          "bg-card backdrop-blur-3xl",
+          "relative flex items-end gap-2 rounded-2xl px-3 pb-2 pt-2.5 pointer-events-auto",
+          "bg-card/70 backdrop-blur-3xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]",
           "border border-border/30",
-          "before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl",
-          "before:bg-linear-to-b before:from-background/35 before:to-transparent before:opacity-70",
           className ?? "",
         ].join(" ")}
+        // Listen to mouse movement over the container
+        onMouseMove={(e) => mouseX.set(e.clientX)}
+        onMouseLeave={() => mouseX.set(Infinity)}
       >
         {apps.map((app) => (
           <DockIcon
@@ -61,11 +41,12 @@ export default function Dock({
             active={activeIds.has(app.id)}
             onClick={() => onToggle(app.id)}
             mouseX={mouseX}
-            radius={radius}
-            maxScale={maxScale}
+            baseSize={48}
+            maxSize={72}
+            distanceThreshold={120}
           />
         ))}
       </motion.div>
-    </div>
+    </nav>
   );
 }
