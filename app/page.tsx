@@ -82,13 +82,14 @@ export default function Home() {
   if (isMobile === null) return null;
 
   return (
-    <main className="desktop-bg min-h-screen w-screen">
+        <> 
       {isMobile ? (
         <div className="no-scrollbar">
           <Mobile />
         </div>
       ) : (
-        <>
+    <main className="desktop-bg min-h-screen w-screen">
+
           <MenuBar />
           <Desktop />
           <Weather />
@@ -98,8 +99,8 @@ export default function Home() {
           <Visitors />
           <Music />
           <ThemeCard />
-        </>
+        </main>
       )}
-    </main>
+      </>
   );
 }

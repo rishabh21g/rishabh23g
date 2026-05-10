@@ -68,7 +68,7 @@ export default function Mobile() {
   }, []);
 
   return (
-    <div className="block sm:hidden bg-card w-full min-h-screen pb-12">
+    <div className="block sm:hidden bg-card w-full min-h-screen pb-12 p-4">
       <SectionTabs active={activeId} />
 
       <motion.div variants={container} initial="hidden" animate="show">
