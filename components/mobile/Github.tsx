@@ -46,7 +46,7 @@ export default function MobileGithubStreak() {
   if (loading || error) return null;
 
   return (
-    <div className="w-full mt-3">
+    <div className="w-full mt-3 mx-auto px-4">
       <AnimatePresence initial={true}>
         {calendar && (
           <motion.div
