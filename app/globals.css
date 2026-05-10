@@ -319,3 +319,16 @@
     opacity: 0.9;
   }
 }
+
+@media (max-width: 639px) {
+  html,
+  body {
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* old Edge/IE */
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;              /* Chromium/Safari */
+  }
+}

@@ -11,10 +11,37 @@ import { StackSection } from "./StackSection";
 import { EducationSection } from "./EducationSection";
 import { ProjectsSection } from "./ProjectSection";
 import MobileGithubStreak from "./Github";
+import { motion, useReducedMotion, Variants } from "framer-motion";
 
 export default function Mobile() {
   const [activeId, setActiveId] = useState<SectionId>("home");
   const resume = RESUME;
+  const reduceMotion = useReducedMotion();
+
+  const container: Variants = {
+    hidden: {},
+    show: {
+      transition: reduceMotion ? {} : { staggerChildren: 0.06, delayChildren: 0.05 },
+    },
+  };
+
+  //  type the bezier as a 4-number tuple, not number[]
+  const ease = [0.12, 1, 0.2, 1] as const;
+
+  const item: Variants = reduceMotion
+    ? {
+        hidden: { opacity: 1, y: 0, filter: "blur(0px)" },
+        show: { opacity: 1, y: 0, filter: "blur(0px)" },
+      }
+    : {
+        hidden: { opacity: 0, y: 10, filter: "blur(14px)" },
+        show: {
+          opacity: [0, 0.95, 0.8, 1],
+          y: 0,
+          filter: ["blur(14px)", "blur(2px)", "blur(6px)", "blur(0px)"],
+          transition: { duration: 0.55, ease },
+        },
+      };
 
   // Track active section via IntersectionObserver
   useEffect(() => {
@@ -42,47 +69,50 @@ export default function Mobile() {
 
   return (
     <div className="block sm:hidden bg-card w-full min-h-screen pb-12">
-
       <SectionTabs active={activeId} />
 
-      <div className="pt-2 px-3 pb-6 mx-auto w-full space-y-6">
-        <section id="home" className="scroll-mt-24">
+      <motion.div variants={container} initial="hidden" animate="show">
+        <motion.section id="home" className="scroll-mt-24" variants={item}>
           <SectionShell sectionKey="home">
             <HomeSection resume={resume} />
           </SectionShell>
-        </section>
-        <section>
+        </motion.section>
+
+        <motion.section variants={item}>
           <MobileGithubStreak />
-        </section>
-        <section id="work" className="scroll-mt-24">
+        </motion.section>
+
+        <motion.section id="work" className="scroll-mt-24" variants={item}>
           <SectionShell sectionKey="work">
             <WorkSection resume={resume} />
           </SectionShell>
-        </section>
+        </motion.section>
 
-        <section id="skills" className="scroll-mt-24">
+        <motion.section id="skills" className="scroll-mt-24" variants={item}>
           <SectionShell sectionKey="skills">
             <StackSection resume={resume} />
           </SectionShell>
-        </section>
+        </motion.section>
 
-        <section id="projects" className="scroll-mt-24">
+        <motion.section id="projects" className="scroll-mt-24" variants={item}>
           <SectionShell sectionKey="projects">
             <ProjectsSection resume={resume} />
           </SectionShell>
-        </section>
+        </motion.section>
 
-        <section id="education" className="scroll-mt-24">
+        <motion.section id="education" className="scroll-mt-24" variants={item}>
           <SectionShell sectionKey="education">
             <EducationSection resume={resume} />
           </SectionShell>
-        </section>
+        </motion.section>
 
-
-        <footer className="pt-8 text-center text-xs text-muted-foreground/60 border-t border-border/20 mt-8">
+        <motion.footer
+          className="pt-8 text-center text-xs text-muted-foreground/60 border-t border-border/20 mt-8"
+          variants={item}
+        >
           © {new Date().getFullYear()} Rishabh Gupta. All rights reserved.
-        </footer>
-      </div>
+        </motion.footer>
+      </motion.div>
     </div>
   );
 }
