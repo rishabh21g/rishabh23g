@@ -1,40 +1,12 @@
 import React from "react";
 import { RESUME } from "@/constants/RESUME";
 
-const TAG_KEYWORDS = [
-  "Go",
-  "Golang",
-  "TypeScript",
-  "JavaScript",
-  "React",
-  "Next.js",
-  "React Native",
-  "Expo",
-  "Node.js",
-  "Express",
-  "PostgreSQL",
-  "Redis",
-  "Docker",
-  "WebSocket",
-  "TanStack Query",
-  "Context API",
-  "Canvas",
-  "CI/CD",
-  "Vercel",
-];
-
 function Chip({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-flex items-center rounded-full bg-muted/20 ring-1 ring-border/25 px-2.5 py-1 text-[0.65rem] text-muted-foreground/70">
       {children}
     </span>
   );
-}
-
-function extractTags(highlights: string[]) {
-  const hay = highlights.join(" ").toLowerCase();
-  const tags = TAG_KEYWORDS.filter((t) => hay.includes(t.toLowerCase()));
-  return Array.from(new Set(tags)).slice(0, 6);
 }
 
 export default function Experience() {
@@ -50,45 +22,46 @@ export default function Experience() {
 
       <div className="mt-4">
         {experience.map((job, idx) => {
-          const summary = job.highlights?.[0] ?? "";
-          const tags = extractTags(job.highlights ?? []);
+          // Using the specific techTags from RESUME.ts instead of extracting them
+          const tags = job.techTags || [];
 
           return (
             <div key={`${job.company}-${job.role}-${job.start}`} className="py-6">
-              <div className="flex items-start justify-between gap-6">
+              <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <div className="text-lg font-semibold tracking-tight text-foreground/90">
-                      {job.company}
-                    </div>
-                    <div className="text-xs text-muted-foreground/60">
-                      {job.role}
-                    </div>
+                  <div className="text-sm font-semibold text-foreground/90">
+                    {job.company}{" "}
+                    <span className="font-normal text-muted-foreground/60">— {job.role}</span>
                   </div>
-
-                  {summary ? (
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground/70">
-                      {summary}
-                    </p>
-                  ) : null}
-
-                  {tags.length ? (
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {tags.map((t) => (
-                        <Chip key={t}>{t}</Chip>
-                      ))}
-                    </div>
-                  ) : null}
+                  <div className="mt-1 text-xs text-muted-foreground/60">{job.location}</div>
                 </div>
 
-                <div className="shrink-0 text-xs text-muted-foreground/60">
+                <div className="text-xs text-muted-foreground/60 shrink-0">
                   {job.start} — {job.end}
                 </div>
               </div>
 
-              {idx !== experience.length - 1 ? (
+              {job.highlights && job.highlights.length > 0 && (
+                <ul className="mt-3 space-y-2 pl-4 list-disc marker:text-muted-foreground/50">
+                  {job.highlights.map((point, i) => (
+                    <li key={i} className="text-xs leading-relaxed text-muted-foreground/70">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {tags.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {tags.map((t) => (
+                    <Chip key={t}>{t}</Chip>
+                  ))}
+                </div>
+              )}
+
+              {idx !== experience.length - 1 && (
                 <div className="mt-6 h-px w-full bg-border/20" />
-              ) : null}
+              )}
             </div>
           );
         })}

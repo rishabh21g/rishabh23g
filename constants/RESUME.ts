@@ -69,6 +69,7 @@ export type ResumeExperience = {
   end: string;   // "Present"
   location: string; // "Remote"
   highlights: string[];
+  techTags?: string[]; 
 };
 
 export type ResumeProject = {
@@ -138,11 +139,25 @@ export const RESUME: ResumeData = {
   summary: "Software Development Engineer specializing in Golang and JavaScript, with expertise in building scalable and modern web and mobile applications ",
 
   experience: [
+        {
+      company: "Inboxkit",
+      role: "Fullstack Engineer",
+      start: "May 2026",
+      end: "Present",
+      location: "Onsite - Gurgaon",
+           highlights: [
+        "Developing core features for a scalable cold email infrastructure platform serving enterprise and agency clients.",
+        "Building and integrating robust REST APIs and webhooks to streamline automated domain setup and DNS configuration.",
+        "Contributing to a high-performance React frontend, enabling users to manage bulk mailbox provisioning and track email deliverability metrics.",
+        "Collaborating on automated systems for DKIM, DMARC, and SPF record generation to ensure 95%+ inbox placement rates."
+      ],
+      techTags: ["Next.js","Shadcn", "TypeScript", "MongoDB",  "REST API" , "Express.js" , "Node.js"]
+    },
     {
       company: "Logicknots",
       role: "Software Development Engineer I",
       start: "Jul 2025",
-      end: "Present",
+      end: "Jan 2026",
       location: "Remote",
       highlights: [
         "Promoted from Intern to SDE I for leading end-to-end development of a Canvas-based draw editor (React.js) and a cross-platform LMS app (React Native/Expo).",
@@ -151,6 +166,7 @@ export const RESUME: ResumeData = {
         "Developed core Canvas rendering logic, tools (ruler, rectangle, guides), and real-time synchronization between UI and state.",
         "Containerized services with Docker to streamline CI/CD and maintain consistent multi-environment deployments.",
       ],
+      techTags: ["React", "TypeScript", "Canvas API", "Go", "PostgreSQL", "Docker" ]
     },
     {
       company: "SocialZone",
@@ -161,6 +177,7 @@ export const RESUME: ResumeData = {
       highlights: [
         "Developed the company’s official website using React.js, Framer Motion, and Tailwind CSS with lazy loading, asset optimization, and a scalable design system.",
       ],
+      techTags: ["React", "framer-motion", "Tailwind CSS"]
     },
   ],
 
