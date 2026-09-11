@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { BiWindows } from "react-icons/bi";
+import { BiWindows, BiNetworkChart } from "react-icons/bi";
 import { BsTypescript } from "react-icons/bs";
 
 import {
@@ -12,13 +12,15 @@ import {
 } from "react-icons/si";
 import { VscCode } from "react-icons/vsc";
 import {
-  FaReact, FaDatabase, FaVideo, FaMapMarkedAlt
+  FaReact, FaDatabase, FaAws
 } from "react-icons/fa";
 import { FaGolang } from "react-icons/fa6";
-import { SiNginx, SiPostgresql, SiRedis, SiTypescript, SiVite, SiFirebase, SiSocketdotio, SiExpo } from "react-icons/si";
-import { TbApi } from "react-icons/tb";
-import { BiNetworkChart } from "react-icons/bi";
-import { BsLightningCharge } from "react-icons/bs";
+import {
+  SiNginx, SiPostgresql, SiRedis, SiFirebase, SiSocketdotio, SiExpo,
+  SiOpensearch, SiMinio, SiK6, SiSlack, SiCloudflare, SiAnthropic,
+  SiMongodb, SiFastify, SiRazorpay, SiWireguard, SiPuppeteer, SiDuckdb, SiLivekit, SiResend
+} from "react-icons/si";
+import { TbApi, TbVector, TbWebhook, TbRocket, TbActivityHeartbeat, TbDatabaseSearch, TbBrowser, TbGhost, TbPlugConnected } from "react-icons/tb";
 
 export type ResumeLinkKey =
   | "portfolio"
@@ -69,7 +71,8 @@ export type ResumeExperience = {
   end: string;   // "Present"
   location: string; // "Remote"
   highlights: string[];
-  techTags?: string[]; 
+  techTags?: string[];
+  links?: ResumeLink[];
 };
 
 export type ResumeProject = {
@@ -94,6 +97,7 @@ export type ResumeAchievement = {
   title: string;
   org?: string;
   highlights: string[];
+  links?: ResumeLink[];
 };
 
 export type ResumeSkills = {
@@ -119,14 +123,14 @@ export type ResumeData = {
 export const RESUME: ResumeData = {
   basics: {
     name: "Rishabh Gupta",
-    headline: "Software Engineer / Fullstack Developer Golang + React Native",
+    headline: "Software Engineer, Backend and Infrastructure (Go, Python, TypeScript)",
     location: "Saket, New Delhi",
     email: "rishabhiitm@zohomail.in",
     handle: "rishabh21g",
     age: 23,
     avatarSrc: "/dp.jpeg",
     links: [
-      { key: "portfolio", label: "Portfolio", href: "https://rishabhiitm.me", icon: FiGlobe },
+      { key: "portfolio", label: "Portfolio", href: "https://rishabh.godraw.app/", icon: FiGlobe },
       { key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/rishabh19g/", icon: FaLinkedin },
       { key: "github", label: "GitHub", href: "https://github.com/rishabh21g", icon: FaGithub },
       { key: "mail", label: "Mail", href: "mailto:rishabhiitm@zohomail.in", icon: FiMail },
@@ -136,22 +140,31 @@ export const RESUME: ResumeData = {
     ],
   },
 
-  summary: "Software Development Engineer specializing in Golang and JavaScript, with expertise in building scalable and modern web and mobile applications ",
+  summary: "Backend and infrastructure engineer working in Go, Python and TypeScript. I built Scout, an AI native web search and knowledge API with its own crawl fleet, its own index and hybrid lexical plus vector retrieval, and I run the production fleet behind it at Enrich Labs (enrich.so).",
 
   experience: [
-        {
-      company: "Inboxkit",
+    {
+      company: "Enrich Labs / Inboxkit",
       role: "Fullstack Engineer",
       start: "May 2026",
       end: "Present",
       location: "Onsite - Gurgaon",
-           highlights: [
-        "Developing core features for a scalable cold email infrastructure platform serving enterprise and agency clients.",
-        "Building and integrating robust REST APIs and webhooks to streamline automated domain setup and DNS configuration.",
-        "Contributing to a high-performance React frontend, enabling users to manage bulk mailbox provisioning and track email deliverability metrics.",
-        "Collaborating on automated systems for DKIM, DMARC, and SPF record generation to ensure 95%+ inbox placement rates."
+      links: [
+        { key: "live", label: "enrich.so", href: "https://enrich.so", icon: FaEarthAsia },
       ],
-      techTags: ["Next.js","Shadcn", "TypeScript", "MongoDB",  "REST API" , "Express.js" , "Node.js"]
+      highlights: [
+        "Built **Scout** on my own, end to end. It is an **AI native web search and knowledge API for LLMs and agents**, the same category **Exa and Parallel.ai** work in, with its own crawl fleet, its own index, **hybrid lexical and vector retrieval** and verifiable answers. The scrape, crawl and extract side matches what Firecrawl offers and prices at or under market.",
+        "It runs as **13 Go and Python microservices**: a crawler, a fetcher, a parser, an **embedder**, a **re ranker**, a lexical indexer, a vector indexer, a search API, and workers for extraction, screenshots and sitemaps. Every service has graceful shutdown, structured logging, health and metrics endpoints.",
+        "Go and Python talk to each other over **gRPC with protobuf**. One set of proto files is the contract for every service, generated into both languages, so the ML side in Python and the serving side in Go stay in sync and calls stay typed and streaming friendly.",
+        "Built our own corpus instead of renting an index. I pull **Common Crawl** data straight from their public **S3** buckets and process it with **DuckDB**, with **Redis** tracking shards and handling dedupe, then feed it through the embedder and both indexers so the corpus keeps growing. The re ranker sits on top of the hybrid results.",
+        "I own the production fleet. **6 VPS and 31 containers** split by plane, lexical index, vector index, serving, ML inference, crawl, and a Postgres and Redis spine, all joined over a **WireGuard mesh**. Datastores listen on the mesh only and a single Cloudflare fronted box takes public traffic.",
+        "Deploys run on **Dokploy**, one Compose file per plane, each tracking main so a merge deploys itself. Scripted host bootstrap, per plane rollout, contract tests after every deploy, **k6** for load testing, and **Beszel** for fleet monitoring with a 30 alert baseline kept in version control and alerts routed to Slack.",
+        "Wrote the batch engine every async product sits on. **Redis Streams** wakes the workers, **Postgres holds the source of truth**, compare and set instead of locks, at least once delivery with idempotent workers, and a reaper that sweeps stuck jobs.",
+        "Built a **5 tier fetch chain** for anti bot sites: plain HTTP, TLS fingerprint impersonation, proxy pool, headless Chromium, then Puppeteer, on top of a Postgres backed crawl frontier with Redis priority queues, circuit breakers and a byte budget per tier.",
+        "Took **screenshot p95 from 25s to 5s** and **search p50 from 1288ms to 700ms** on the same hardware after proving the limits were software, container CPU quotas and a semaphore permit leak, not the machines. The fleet sits at **33% CPU when saturated**. I also debugged two production outages solo, a 24 hour indexing stall and a crawl fleet wedge.",
+        "Also ship **Inboxkit**, the cold email side of the business. Automated domain and DNS setup for **DKIM, DMARC and SPF** over REST APIs and webhooks, with a React dashboard for bulk mailbox provisioning.",
+      ],
+      techTags: ["Go", "Python", "gRPC", "Protobuf", "TypeScript", "PostgreSQL", "Redis / Redis Streams", "DuckDB", "OpenSearch", "Qdrant", "Common Crawl", "MinIO / S3", "Docker", "Dokploy", "WireGuard", "Beszel", "k6", "Puppeteer", "Cloudflare"]
     },
     {
       company: "Logicknots",
@@ -201,12 +214,32 @@ export const RESUME: ResumeData = {
       { name: "Shadcn", icon: SiShadcnui },
       { name: "Tailwind CSS", icon: SiTailwindcss },
       { name: "Zustand", icon: SiRedux },
+      { name: "Fastify", icon: SiFastify },
+      { name: "gRPC", icon: TbApi },
+      { name: "Protobuf", icon: BiNetworkChart },
+      { name: "WebSockets", icon: SiSocketdotio },
+      { name: "Webhooks", icon: TbWebhook },
+      { name: "Puppeteer", icon: SiPuppeteer },
+      { name: "Playwright", icon: TbBrowser },
+      { name: "Cloak Browser", icon: TbGhost },
+      { name: "LiveKit", icon: SiLivekit },
+      { name: "MCP Servers", icon: TbPlugConnected },
+      { name: "Resend", icon: SiResend },
+      { name: "LLM APIs (Claude/OpenAI)", icon: SiAnthropic },
+      { name: "RAG / Vector Search", icon: TbDatabaseSearch },
     ],
     database: [
       { name: "Redis", icon: SiRedis },
       { name: "PostgresSQL", icon: SiPostgresql },
       { name: "Supabase", icon: SiSupabase },
       { name: "Firebase", icon: SiFirebase },
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "DuckDB", icon: SiDuckdb },
+      { name: "Qdrant (Vector DB)", icon: TbVector },
+      { name: "OpenSearch", icon: SiOpensearch },
+      { name: "MinIO", icon: SiMinio },
+      { name: "Cloudflare R2", icon: SiCloudflare },
+      { name: "AWS S3", icon: FaAws },
     ],
     toolsOS: [
       { name: "Windows", icon: BiWindows },
@@ -217,6 +250,12 @@ export const RESUME: ResumeData = {
       { name: "NPM", icon: FaNpm },
       { name: "VSCode", icon: VscCode },
       { name: "Vercel", icon: SiVercel },
+      { name: "Dokploy", icon: TbRocket },
+      { name: "k6 (Load Testing)", icon: SiK6 },
+      { name: "Beszel (Monitoring)", icon: TbActivityHeartbeat },
+      { name: "Slack", icon: SiSlack },
+      { name: "WireGuard", icon: SiWireguard },
+      { name: "Razorpay", icon: SiRazorpay },
     ],
     theoretical: ["Operating System",
       "Computer Networks",
@@ -224,6 +263,8 @@ export const RESUME: ResumeData = {
       "Database Management System",
       "Computational Thinking",
       "Theory of Computation",
+      "AI-Based Engineering (LLM apps, RAG, agentic workflows)",
+      "System Design & Observability",
     ],
   },
 
@@ -241,161 +282,34 @@ export const RESUME: ResumeData = {
         },
       ],
       highlights: [
-        "Built an Excalidraw-like real-time collaborative whiteboard from scratch using Canvas API and Rough.js, supporting smooth freehand drawing and object manipulation",
-        "Engineered a custom rendering pipeline with requestAnimationFrame, viewport culling, and a multi-layered canvas",
-        " Implemented real-time synchronization using Yjs CRDTs and Gorilla WebSocket, ensuring conflict-free updates across multiple clients",
-        "Designed a scalable backend using Go, Dockerized microservices, and Nginx reverse proxy for efficient request routing and deployment",
-        "Currently implementing Redis Pub/Sub for cross-region synchronization to support low-latency real-time collaboration at scale"
+        "Built an **infinite collaborative whiteboard** from scratch on the Canvas API and Rough.js, with freehand drawing, object manipulation and **infinite pages inside one document**.",
+        "Wrote a custom rendering pipeline with requestAnimationFrame, viewport culling and a multi layered canvas so large boards stay smooth.",
+        "Real time sync runs on **Yjs CRDTs over WebSocket**, so edits merge without conflicts across clients, with Redis Pub/Sub carrying updates between regions.",
+        "**Self hosted LiveKit** for voice and video on the canvas. A room holds **50+ collaborators** with live cursors, chat and threaded comments on any shape.",
+        "Built an **MCP server for drawing**, so an AI agent can draw on the canvas directly: ER diagrams, notes, tables and shapes, plus an in app **AI chat** for generating and editing boards.",
+        "Built a **teaching mode** on the canvas that plays strokes back as a lesson and **predicts the next stroke** to guide the person following along.",
+        "Docs live next to the drawings, so a page can hold an **ER diagram with its documentation** instead of a separate file.",
+        "**Role based sharing** with per link permissions, plus share by email and email campaigns for growth, with onboarding mail sent through **Resend**.",
+        "Payments run on **Razorpay**. The backend is **Fastify**, fronted by **Cloudflare** as proxy and CDN.",
+        "I deploy and run the whole thing myself on a **VPS with Dokploy**, Docker containers behind Nginx, no managed platform involved.",
       ],
       stack: [
         { name: "React", icon: FaReact },
-        { name: "Zustand", icon: SiRedux }, // Fallback for state manager
+        { name: "Zustand", icon: SiRedux },
+        { name: "Fastify", icon: SiFastify },
         { name: "Go", icon: FaGolang },
-        { name: "WebSocket", icon: SiSocketdotio },
+        { name: "WebSocket / Yjs", icon: SiSocketdotio },
+        { name: "LiveKit", icon: SiLivekit },
+        { name: "MCP", icon: TbPlugConnected },
         { name: "PostgreSQL", icon: SiPostgresql },
+        { name: "Redis (Pub/Sub)", icon: SiRedis },
+        { name: "Razorpay", icon: SiRazorpay },
+        { name: "Resend", icon: SiResend },
+        { name: "Cloudflare", icon: SiCloudflare },
         { name: "Docker", icon: FaDocker },
         { name: "Nginx", icon: SiNginx },
-        { name: "Redis (Pub/Sub)", icon: SiRedis },
+        { name: "Dokploy", icon: TbRocket },
         { name: "REST API", icon: TbApi }
-      ],
-    },
-    {
-      name: " Web Crawler",
-      subtitle: "A Go-based web crawler using a producer-consumer pattern (In Progress...)",
-      progress: "In progress",
-
-      links: [
-        {
-          key: "repo",
-          label: "GitHub",
-          href: "https://github.com/rishabh21g/web-crawler",
-          icon: FaGithub,
-        },
-      ],
-      highlights: [
-        "Built a concurrent web crawler in Go using producer consumer pattern (10 goroutines/workers) with channels + sync.WaitGroup to crawl pages in parallel.",
-        "Implemented a thread-safe scheduler (mutex-protected Seen map) to enforce domain allowlisting + depth limit (MaxDepth=2) and prevent duplicate URL processing.",
-        "Developed an HTTP fetcher with context cancellation and strict validation: 10s timeout, Content-Type must include text/html, max response size 5MB to avoid memory blowups.",
-        "Implemented HTML link extraction using golang.org/x/net/html, resolving relative URLs to absolute and filtering junk schemes (#, mailto:, javascript:, tel:).",
-        "Added backpressure handling via a buffered task channel (size 100) and non-blocking enqueue (drops when full) to keep workers responsive under high fan-out.",
-      ],
-      stack: [
-        { name: "Go", icon: FaGolang },
-        { name: "Goroutines", icon: BsLightningCharge },
-        { name: "Channels", icon: BiNetworkChart }
-      ],
-    },
-    {
-      name: "Cinema Booking System",
-      subtitle:
-        "A full-stack seat booking app with a Go REST API + Redis-backed holds and a React (Vite) UI",
-      progress: "In progress",
-      links: [
-        {
-          key: "repo",
-          label: "GitHub",
-          href: "https://github.com/rishabh21g/booking_cinema.git",
-          icon: FaGithub,
-        },
-      ],
-      highlights: [
-        "Built a Go backend with `net/http` + `ServeMux` exposing REST endpoints for listing movies, viewing seat status, holding seats, confirming sessions, and releasing holds.",
-        "Implemented concurrency-safe seat holding using Redis atomic set-if-not-exists (NX) with a hold TTL (2 minutes), guaranteeing only one user can hold a seat under high contention.",
-        "Added a reverse session lookup in Redis (`session:{id}` → seat key) to support confirm/release flows and avoid scanning keys for session operations.",
-        "Developed a React UI (Vite) with componentized layout (Movies, SeatGrid, Checkout, Timer) and polling (every 2s) to keep seat availability synced across multiple clients.",
-        "Wrote a high-contention concurrency test (`go test -race`) that launches 100k goroutines attempting the same seat and asserts exactly 1 success and the rest failures.",
-      ],
-      stack: [
-        { name: "Go", icon: FaGolang },
-        { name: "Redis", icon: SiRedis },
-        { name: "React", icon: FaReact },
-        { name: "Vite", icon: SiVite },
-        { name: "TypeScript", icon: SiTypescript },
-        { name: "Docker", icon: FaDocker }
-      ],
-    },
-    {
-      name: "AI Interview Mobile Application",
-      subtitle: "AI-Powered Technical Interview Platform",
-      progress: "Closed",
-
-      links: [
-        {
-          key: "repo",
-          label: "GitHub",
-          href: "https://github.com/rishabh21g/LK-interview-app.git",
-          icon: FaGithub,
-        },
-      ],
-      highlights: [
-        "Led the development of a cross-platform mobile app (React Native) for conducting AI-driven technical interviews.",
-        "Integrated real-time speech-to-text transcription and analysis to provide candidates with live feedback and generate performance metrics.",
-        "Engineered a system to securely record, process, and upload entire interview sessions for post-interview review by hiring managers.",
-        "Built a robust and secure authentication flow and managed complex application state using Zustand for a seamless user experience.",
-      ],
-      stack: [
-        { name: "React Native", icon: FaReact },
-        { name: "Expo", icon: SiExpo },
-        { name: "Zustand", icon: SiRedux },
-        { name: "Speech-to-Text", icon: FaVideo },
-        { name: "Secure Auth", icon: TbApi }
-      ],
-    },
-    {
-      name: "AI Trip Planner",
-      subtitle: "Effortless, AI-powered trip recommendations",
-      progress: "Closed",
-
-      links: [
-        {
-          key: "repo",
-          label: "GitHub",
-          href: "https://github.com/rishabh21g/Trip_planner",
-          icon: FaGithub,
-        },
-      ],
-      highlights: [
-        "Developed a smart travel planner that generates personalized itineraries using the Gemini AI API.",
-        "Integrated the Google Places API to fetch and display top-rated destinations, including reviews and locations.",
-        "Implemented a real-time database with Firebase to securely save and sync user trip plans across devices.",
-        "Built a modern and responsive user interface using React.js, Tailwind CSS, and Shadcn UI.",
-        "Engineered a secure authentication system with Firebase Auth for user login and registration.",
-        "Created an interactive map view to help users visually explore and organize their travel destinations.",
-      ],
-      stack: [
-        { name: "React", icon: FaReact },
-        { name: "Tailwind CSS", icon: SiTailwindcss },
-        { name: "Firebase", icon: SiFirebase },
-        { name: "Gemini AI", icon: BsLightningCharge },
-        { name: "Google Places API", icon: FaMapMarkedAlt }
-      ],
-    },
-  ],
-  client_projects: [
-    {
-      name: "Doctor Portfolio",
-      subtitle: "Personal Website for a Doctor with appointment scheduling",
-      progress: "Closed",
-
-      links: [
-        {
-          key: "live",
-          label: "Live",
-          href: "https://drreemabhatt.in/",
-          icon: FaEarthAsia,
-        },
-      ],
-      highlights: [
-        "Designed and developed a personal portfolio website for Dr. Satyarth, showcasing his medical expertise and services.",
-        "Implemented a clean and responsive design using React.js and Tailwind CSS, ensuring optimal user experience across devices.",
-        "Integrated contact forms and appointment scheduling features to enhance patient engagement.",
-      ],
-      stack: [
-        { name: "React", icon: FaReact },
-        { name: "Tailwind CSS", icon: SiTailwindcss },
-        { name: "Vercel", icon: SiVercel },
-        { name: "REST API", icon: TbApi },
-        { name: "Google Map API", icon: FaMapMarkedAlt }
       ],
     },
   ],
@@ -416,6 +330,28 @@ export const RESUME: ResumeData = {
   ],
 
   achievements: [
+    {
+      date: "Jun 2026",
+      title: "1st Place, Hustlerprenaurs by Escape Room",
+      org: "IIT Madras with Kyptronix LLP",
+      highlights: [
+        "Won **1st place** among all participating teams as **founder of GoDraw**, the AI powered collaborative whiteboard, and came away with **startup growth support and mentorship**.",
+      ],
+      links: [
+        {
+          key: "linkedin",
+          label: "LinkedIn",
+          href: "https://www.linkedin.com/in/rishabh19g/overlay/Honor/864312520/treasury/?profileId=ACoAACeah5MBb3_fAXbbmo6Mox4FofqS0m3U18c",
+          icon: FaLinkedin,
+        },
+        {
+          key: "live",
+          label: "Photo",
+          href: "https://hustlepreneur.kyptronix.com/hero3.jpg",
+          icon: FaEarthAsia,
+        },
+      ],
+    },
     {
       date: "June 2025",
       title: "Finalist, CompassionateThon",
@@ -470,7 +406,10 @@ export const RESUME: ResumeData = {
         { name: "Next.js / React js", meta: "Web" },
         { name: "React Native / Expo", meta: "Mobile" },
         { name: "PostgreSQL + Redis", meta: "Data Layer" },
-        { name: "Vercel / Render ", meta: "Deployment" },
+        { name: "Qdrant + OpenSearch", meta: "Search / Vectors" },
+        { name: "MinIO / R2 / S3", meta: "Object Storage" },
+        { name: "Dokploy / Vercel", meta: "Deployment" },
+        { name: "Beszel + k6", meta: "Monitoring / Load Testing" },
       ],
     },
   ],

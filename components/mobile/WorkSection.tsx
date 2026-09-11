@@ -1,5 +1,6 @@
 import { RESUME } from "@/constants/RESUME";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Highlighted } from "@/components/helpers/Highlighted";
 
 export function WorkSection({ resume }: { resume: typeof RESUME }) {
   const { experience } = resume;
@@ -21,6 +22,23 @@ export function WorkSection({ resume }: { resume: typeof RESUME }) {
                   <span className="font-normal text-muted-foreground/60">— {job.role}</span>
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground/60">{job.location}</div>
+
+                  {job.links && job.links.length > 0 ? (
+                    <div className="mt-1.5 flex flex-wrap items-center gap-3">
+                      {job.links.map((l) => (
+                        <a
+                          key={l.href}
+                          href={l.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground/70 hover:text-foreground/80 transition-colors"
+                        >
+                          <l.icon className="h-3 w-3" />
+                          {l.label}
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
               </div>
               <div className="text-xs text-muted-foreground/60 shrink-0">
                 {job.start} — {job.end}
@@ -30,7 +48,7 @@ export function WorkSection({ resume }: { resume: typeof RESUME }) {
             <ul className="mt-3 space-y-2 pl-4 list-disc marker:text-muted-foreground/50">
               {job.highlights.map((h) => (
                 <li key={h} className="text-xs leading-relaxed text-muted-foreground/70">
-                  {h}
+                  <Highlighted text={h} />
                 </li>
               ))}
             </ul>

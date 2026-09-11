@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rishabhiitm.me"),
+  metadataBase: new URL("https://rishabh.godraw.app"),
   title: {
     default: "Rishabh Gupta | Software Engineer",
     template: "%s | Rishabh Gupta",
@@ -39,12 +39,12 @@ export const metadata: Metadata = {
     "TypeScript",
     "JavaScript",
   ],
-  authors: [{ name: "Rishabh Gupta", url: "https://rishabhiitm.me" }],
+  authors: [{ name: "Rishabh Gupta", url: "https://rishabh.godraw.app" }],
   creator: "Rishabh Gupta",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://rishabhiitm.me",
+    url: "https://rishabh.godraw.app",
     title: "Rishabh Gupta | Software Engineer",
     description: "Software Engineer | Trying to be a better one.",
     siteName: "Rishabh Gupta Portfolio",

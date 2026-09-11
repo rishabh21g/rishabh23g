@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui
 import Chip from "./helpers/Chip";
 import ProgressPill from "./helpers/ProgressPill";
 import { LinkButton } from "./helpers/LinkButton";
+import { Highlighted } from "@/components/helpers/Highlighted";
 
 
 
@@ -58,7 +59,7 @@ export function ProjectsSection({ resume }: { resume: typeof RESUME }) {
             <ul className="mt-3 space-y-2 pl-4 list-disc marker:text-muted-foreground/50">
               {p.highlights.map((h) => (
                 <li key={h} className="text-xs leading-relaxed text-muted-foreground/70">
-                  {h}
+                  <Highlighted text={h} />
                 </li>
               ))}
             </ul>
