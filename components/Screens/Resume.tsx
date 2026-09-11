@@ -97,6 +97,16 @@ function ProjectBlock({ project }: { project: ResumeProject }) {
             <div className="mt-1 text-xs text-muted-foreground/60">{project.subtitle}</div>
           ) : null}
 
+          {project.metrics?.length ? (
+            <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+              {project.metrics.map((m) => (
+                <span key={m} className="text-xs font-medium text-foreground/80">
+                  {m}
+                </span>
+              ))}
+            </div>
+          ) : null}
+
           {project.stack?.length ? (
             <div className="mt-2 flex flex-wrap gap-2">
               {project.stack.map((s) =>
@@ -313,7 +323,7 @@ export default function Resume() {
 
       {/* Projects */}
       <div className="mt-6">
-        <SectionLabel>Projects</SectionLabel>
+        <SectionLabel>Founded</SectionLabel>
 
         <div className="mt-4 space-y-6">
           {projects.map((p) => (

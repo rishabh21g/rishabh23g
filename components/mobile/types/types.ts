@@ -5,6 +5,6 @@ export const SECTIONS: Array<{ id: SectionId; label: string; menuBarLabel: strin
   { id: "home", label: "Home", menuBarLabel: "Home" },
   { id: "work", label: "Work", menuBarLabel: "Experience" },
   { id: "skills", label: "Skills", menuBarLabel: "Skills" },
-  { id: "projects", label: "Projects", menuBarLabel: "Projects" },
+  { id: "projects", label: "Founded", menuBarLabel: "Founded" },
   { id: "education", label: "More", menuBarLabel: "Education" },
 ];

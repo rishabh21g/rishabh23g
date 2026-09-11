@@ -79,6 +79,7 @@ export type ResumeProject = {
   name: string;
   subtitle?: string;
   progress: string;
+  metrics?: string[];
   links: ResumeLink[];
   highlights: string[];
   stack?: SkillWithIcon[];
@@ -154,7 +155,7 @@ export const RESUME: ResumeData = {
       ],
       highlights: [
         "Built **Scout** on my own, end to end. It is an **AI native web search and knowledge API for LLMs and agents**, the same category **Exa and Parallel.ai** work in, with its own crawl fleet, its own index, **hybrid lexical and vector retrieval** and verifiable answers. The scrape, crawl and extract side matches what Firecrawl offers and prices at or under market.",
-        "It runs as **13 Go and Python microservices**: a crawler, a fetcher, a parser, an **embedder**, a **re ranker**, a lexical indexer, a vector indexer, a search API, and workers for extraction, screenshots and sitemaps. Every service has graceful shutdown, structured logging, health and metrics endpoints.",
+        "It serves **100 requests per second** in production and runs as **13 Go and Python microservices**: a crawler, a fetcher, a parser, an **embedder**, a **re ranker**, a lexical indexer, a vector indexer, a search API, and workers for extraction, screenshots and sitemaps. Every service has graceful shutdown, structured logging, health and metrics endpoints.",
         "Go and Python talk to each other over **gRPC with protobuf**. One set of proto files is the contract for every service, generated into both languages, so the ML side in Python and the serving side in Go stay in sync and calls stay typed and streaming friendly.",
         "Built our own corpus instead of renting an index. I pull **Common Crawl** data straight from their public **S3** buckets and process it with **DuckDB**, with **Redis** tracking shards and handling dedupe, then feed it through the embedder and both indexers so the corpus keeps growing. The re ranker sits on top of the hybrid results.",
         "I own the production fleet. **6 VPS and 31 containers** split by plane, lexical index, vector index, serving, ML inference, crawl, and a Postgres and Redis spine, all joined over a **WireGuard mesh**. Datastores listen on the mesh only and a single Cloudflare fronted box takes public traffic.",
@@ -273,11 +274,12 @@ export const RESUME: ResumeData = {
       name: "GoDraw",
       subtitle: "Free Infinite Whiteboard (PWA)",
       progress: "In progress",
+      metrics: ["200+ active users", "3k weekly visits"],
       links: [
         {
           key: "live",
           label: "Live",
-          href: "https://plus.gordaw.app/",
+          href: "https://plus.godraw.app/",
           icon: FaEarthAsia,
         },
       ],
@@ -290,7 +292,7 @@ export const RESUME: ResumeData = {
         "Built a **teaching mode** on the canvas that plays strokes back as a lesson and **predicts the next stroke** to guide the person following along.",
         "Docs live next to the drawings, so a page can hold an **ER diagram with its documentation** instead of a separate file.",
         "**Role based sharing** with per link permissions, plus share by email and email campaigns for growth, with onboarding mail sent through **Resend**.",
-        "Payments run on **Razorpay**. The backend is **Fastify**, fronted by **Cloudflare** as proxy and CDN.",
+        "Payments run on **Razorpay**. The backend is **Fastify on MongoDB**, fronted by **Cloudflare** as proxy and CDN.",
         "I deploy and run the whole thing myself on a **VPS with Dokploy**, Docker containers behind Nginx, no managed platform involved.",
       ],
       stack: [
@@ -301,7 +303,7 @@ export const RESUME: ResumeData = {
         { name: "WebSocket / Yjs", icon: SiSocketdotio },
         { name: "LiveKit", icon: SiLivekit },
         { name: "MCP", icon: TbPlugConnected },
-        { name: "PostgreSQL", icon: SiPostgresql },
+        { name: "MongoDB", icon: SiMongodb },
         { name: "Redis (Pub/Sub)", icon: SiRedis },
         { name: "Razorpay", icon: SiRazorpay },
         { name: "Resend", icon: SiResend },

@@ -13,7 +13,7 @@ export function ProjectsSection({ resume }: { resume: typeof RESUME }) {
   return (
     <Card className="bg-background/10 backdrop-blur-xl ring-0">
       <CardHeader>
-        <CardTitle className="text-3xl font-extrabold ">Projects</CardTitle>
+        <CardTitle className="text-3xl font-extrabold ">Founded</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-6">
@@ -28,6 +28,16 @@ export function ProjectsSection({ resume }: { resume: typeof RESUME }) {
 
                 {p.subtitle ? (
                   <div className="mt-1 text-xs text-muted-foreground/60">{p.subtitle}</div>
+                ) : null}
+
+                {p.metrics?.length ? (
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+                    {p.metrics.map((m) => (
+                      <span key={m} className="text-xs font-medium text-foreground/80">
+                        {m}
+                      </span>
+                    ))}
+                  </div>
                 ) : null}
 
                 {p.stack?.length ? (
